@@ -12,7 +12,7 @@
 Welcome to our Unity videogame final project workspace called Geometria del Caos!  
 Here we are going to share all our current work and also the assets that we are using 🚀
 
-![image](logo.png)
+![image](Logo.png)
 
 ⚠️ **Important Note:** I upload here my portfolio with all the information like projects, personal information and more stuff.
 
