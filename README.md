@@ -9,8 +9,10 @@
   <img src="https://komarev.com/ghpvc/?username=victorcn2006" alt="Profile views" /> 
 </p>
 
-Welcome to our Unity videogame final project workspace!  
+Welcome to our Unity videogame final project workspace called Geometria del Caos!  
 Here we are going to share all our current work and also the assets that we are using 🚀
+
+![image](logo.png)
 
 ⚠️ **Important Note:** I upload here my portfolio with all the information like projects, personal information and more stuff.
 
