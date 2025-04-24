@@ -21,10 +21,18 @@ public class Piece : MonoBehaviour
     }
     private void Update()
     {
+        this.board.Clear(this);
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            Move(Vector2Int.left);
+        }   else if (Input.GetKeyDown(KeyCode.D)){
+            Move(Vector2Int.right);
+        }
+        this.board.Set(this);
 
     }
-    /*
-    private void Move(Vector2Int translation)
+    /*It moves the piece but before it checks if the position is valid*/
+    private bool Move(Vector2Int translation)
     {
         Vector3Int newPosition = this.position;
         newPosition.x += translation.x;
@@ -32,9 +40,10 @@ public class Piece : MonoBehaviour
 
         bool valid = this.board.IsValidPosition(this,newPosition);
         if (valid) {
-            this.position = newPosition;
+            position = newPosition;
+
         }
         return valid;
     }
-    */
+    
 }
