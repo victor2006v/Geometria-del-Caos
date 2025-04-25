@@ -1,14 +1,25 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static GeometriaDelCaos;
 
 public class Piece : MonoBehaviour
 {
+
+    [SerializeField] InputActionAsset inputActionMapping;
+    InputAction horizontal, down, rotation, blockPiece;
     public Board board { get; private set; }
     public PiecesData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; }
 
+
+    public void Awake(){
+        horizontal = inputActionMapping.FindActionMap("Controls").FindAction("Horizontal");
+        down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
+        rotation = inputActionMapping.FindActionMap("Controls").FindAction("Rotation");
+        blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
+    }
     public void Initialize(Board board, Vector3Int position, PiecesData data) { 
         this.board = board;
         this.position = position;
@@ -25,23 +36,16 @@ public class Piece : MonoBehaviour
     private void Update()
     {
         this.board.Clear(this);
-        /*ROTATION*/
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            Rotate(-1);
-        } else if(Input.GetKeyDown(KeyCode.E)){
-            Rotate(1);
-        }
+        float dir = horizontal.ReadValue<float>();
         /*MOVEMENT*/
-        else if (Input.GetKeyDown(KeyCode.A)) {
+        if (dir == -1) {
             Move(Vector2Int.left);
-        } else if (Input.GetKeyDown(KeyCode.D)) {
-            Move(Vector2Int.right);
-        } else if (Input.GetKeyDown(KeyCode.S)) {
-            Move(Vector2Int.down);
-        } else if (Input.GetKeyDown(KeyCode.Space)) {
-            HardDrop();
         }
-
+        else if (dir == 1){
+            Move(Vector2Int.right);
+        }
+        
+        
         this.board.Set(this);
 
     }
