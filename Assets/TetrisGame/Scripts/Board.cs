@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
+/*We need it to use methods from Pieces class GeometriaDelCaos*/
 using static GeometriaDelCaos;
 
 public class Board : MonoBehaviour
 {
-    /*It stores the tilemap of the board. Get: It can be accessed by other different classes
+    /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
      * Set it can be only modified in this class*/
     public Tilemap tilemap { get; private set; }
     /*Same happens to the activePiece get is accessed by other classes and set private only can be modified here*/
@@ -15,11 +16,16 @@ public class Board : MonoBehaviour
     public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
     /*The x are the amount of columns and 20 the amounts of rows*/
     public Vector2Int boardSize = new Vector2Int(10, 20);
-    /*It creates a delimiter to know the borders and contain the pieces inside */
+    /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
     {
         get
         {
+            /**
+             * Result boardSize.x is -(10/2) which is -5, Result boardSize.y which is -(20/2) = -10
+             * Result Vector2Int(-5, 10) the bottom right corner 
+             * 
+             */
             Vector2Int position = new Vector2Int(-this.boardSize.x / 2, -this.boardSize.y / 2);
             return new RectInt(position, this.boardSize);
         }
@@ -27,8 +33,15 @@ public class Board : MonoBehaviour
     /*It stores the tilemap component of the children and also the Piece Script*/
     private void Awake()
     {
+        /**
+         * It stores the tilemap which is in the Children of Board
+         */
         this.tilemap = GetComponentInChildren<Tilemap>();
+
         this.activePiece = GetComponentInChildren<Piece>();
+        /**
+         * For every piece it call Initialize() method
+         */
         for (int i = 0; i < pieces.Length; i++)
         {
             this.pieces[i].Initialize();

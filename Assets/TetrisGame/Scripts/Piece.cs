@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static GeometriaDelCaos;
@@ -6,7 +7,7 @@ public class Piece : MonoBehaviour
 {
 
     [SerializeField] InputActionAsset inputActionMapping;
-    InputAction horizontal, down, rotation, blockPiece;
+    InputAction right, left, down, rotation_left, rotation_right, blockPiece;
     public Board board { get; private set; }
     public PiecesData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
@@ -15,9 +16,12 @@ public class Piece : MonoBehaviour
 
 
     public void Awake(){
-        horizontal = inputActionMapping.FindActionMap("Controls").FindAction("Horizontal");
+        inputActionMapping.Enable();
+        right = inputActionMapping.FindActionMap("Controls").FindAction("Right");
+        left = inputActionMapping.FindActionMap("Controls").FindAction("Left");
         down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
-        rotation = inputActionMapping.FindActionMap("Controls").FindAction("Rotation");
+        rotation_left = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Left");
+        rotation_right = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Right");
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
     }
     public void Initialize(Board board, Vector3Int position, PiecesData data) { 
@@ -35,17 +39,25 @@ public class Piece : MonoBehaviour
     /*CONTROLS*/
     private void Update()
     {
+        //Clean the board
         this.board.Clear(this);
-        float dir = horizontal.ReadValue<float>();
-        /*MOVEMENT*/
-        if (dir == -1) {
-            Move(Vector2Int.left);
-        }
-        else if (dir == 1){
+        if (right.triggered) {
             Move(Vector2Int.right);
+        } else if (left.triggered) {
+            Move(Vector2Int.left);
+        } else if (down.triggered) { 
+            Move(Vector2Int.down);    
         }
-        
-        
+
+        if (rotation_left.triggered) {
+            Rotate(-1);
+        } else if (rotation_right.triggered) { 
+            Rotate(1); 
+        }
+
+        if (blockPiece.triggered) {
+            HardDrop();
+        }
         this.board.Set(this);
 
     }
@@ -64,11 +76,18 @@ public class Piece : MonoBehaviour
 
         bool valid = this.board.IsValidPosition(this,newPosition);
         if (valid) {
-            position = newPosition;
-
+            this.position = newPosition;
         }
         return valid;
     }
+
+    private IEnumerator MoveDelay(Vector3Int newPosition)
+    {
+        yield return 1f;
+        position = newPosition;
+        
+    }
+
     private void Rotate(int direction) {
         this.rotationIndex = Wrap(this.rotationIndex + direction, 0, 4);
         for (int i = 0; i < this.cells.Length; i++){
