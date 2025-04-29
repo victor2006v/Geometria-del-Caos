@@ -7,7 +7,7 @@ public class Piece : MonoBehaviour
 {
 
     [SerializeField] InputActionAsset inputActionMapping;
-    InputAction right, left, down, rotation_left, rotation_right, blockPiece;
+    InputAction right, left, rotation_left, rotation_right, blockPiece;
     public Board board { get; private set; }
     public PiecesData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
@@ -19,7 +19,6 @@ public class Piece : MonoBehaviour
         inputActionMapping.Enable();
         right = inputActionMapping.FindActionMap("Controls").FindAction("Right");
         left = inputActionMapping.FindActionMap("Controls").FindAction("Left");
-        down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
         rotation_left = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Left");
         rotation_right = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Right");
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
@@ -45,8 +44,6 @@ public class Piece : MonoBehaviour
             Move(Vector2Int.right);
         } else if (left.triggered) {
             Move(Vector2Int.left);
-        } else if (down.triggered) { 
-            Move(Vector2Int.down);    
         }
 
         if (rotation_left.triggered) {
