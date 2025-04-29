@@ -65,7 +65,7 @@ public class NewBehaviourScript : MonoBehaviour
 
         rgb.velocity = new Vector2(0, -speed);
         rgbReturn.velocity = new Vector2(0, -speed);
-        yield return new WaitForSeconds(0.87f);
+        yield return new WaitForSeconds(1.14f);
 
         rgb.velocity = Vector2.zero;
         rgbReturn.velocity = Vector2.zero;
