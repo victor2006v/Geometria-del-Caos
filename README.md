@@ -12,7 +12,7 @@
 Welcome to our Unity videogame final project workspace called Geometria del Caos!  
 Here we are going to share all our current work and also the assets that we are using 🚀
 ⚠️ **Important Note:** 
-![Link](https://www.notion.so/Geometria-Del-Caos-GDD-Game-Design-Document-1e4e2e723ea7803480d5e4bfe2be5ac5?pvs=4)
+[Link](https://www.notion.so/Geometria-Del-Caos-GDD-Game-Design-Document-1e4e2e723ea7803480d5e4bfe2be5ac5?pvs=4)
 
 ![Game Design Document](Logo.png)
 
