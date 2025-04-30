@@ -1,3 +1,4 @@
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 /*We need it to use methods from Pieces class GeometriaDelCaos*/
@@ -8,14 +9,19 @@ public class Board : MonoBehaviour
     /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
      * Set it can be only modified in this class*/
     public Tilemap tilemap { get; private set; }
+    [SerializeField]
+    public Tilemap previewTilemap;
     /*Same happens to the activePiece get is accessed by other classes and set private only can be modified here*/
     public Piece activePiece { get; private set; }
     /*Array to access the pieces by order, there are 7 types of pieces, each one has differents forms*/
     public PiecesData[] pieces;
     /*The point where the pieces are going to spawn*/
     public Vector3Int spawnPosition = new Vector3Int(-1, 8, 0);
+    public Vector3Int previewPosition = new Vector3Int(0, 0, 0);
     /*The x are the amount of columns and 20 the amounts of rows*/
     public Vector2Int boardSize = new Vector2Int(10, 20);
+
+    private PiecesData nextPieceData;
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
     {
@@ -49,22 +55,54 @@ public class Board : MonoBehaviour
     }
     private void Start()
     {
+        this.nextPieceData = GetRandomPieceData();
         SpawnPiece();
     }
+
+    private PiecesData GetRandomPieceData()
+    {
+        int random = Random.Range(0, this.pieces.Length);
+        return this.pieces[random];
+    }
+
     //It spawns one of the seven pieces randomly above the board in the center with the spawnPosition
     public void SpawnPiece()
     {
-        int random = Random.Range(0, this.pieces.Length);
-        PiecesData data = this.pieces[random];
+        PiecesData data = this.nextPieceData;
+        this.nextPieceData = GetRandomPieceData();
 
         this.activePiece.Initialize(this, this.spawnPosition, data);
 
         if(IsValidPosition(this.activePiece, this.spawnPosition)) {
             Set(this.activePiece);
+            ShowNextPiece();
         } else
         {
             GameOver();
         } 
+    }
+
+    private void ShowNextPiece()
+    {
+        previewTilemap.ClearAllTiles();
+
+        Vector2Int[] cells = nextPieceData.cells;
+
+        Vector2 center = Vector2.zero;
+        foreach (Vector2Int cell in cells)
+        {
+            center += (Vector2)cell;
+        }
+        center /= cells.Length;
+        Vector2Int centerRounded = Vector2Int.RoundToInt(center);
+
+        Vector3Int manualOffset = new Vector3Int(-1, -1, 0);
+
+        foreach (Vector2Int cell in cells)
+        {
+            Vector3Int drawPosition = previewPosition + manualOffset + new Vector3Int(cell.x - centerRounded.x, cell.y - centerRounded.y, 0);
+            previewTilemap.SetTile(drawPosition, nextPieceData.tile);
+        }
     }
     /*Function that is called when the player dies*/
     public void GameOver() {

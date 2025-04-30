@@ -48,6 +48,27 @@ public class Ghost : MonoBehaviour
     private void Drop()
     {
         Vector3Int position = this.trackingPiece.position;
+
+        int current = position.y;
+        int bottom = -this.board.boardSize.y / 2 - 1;
+
+        this.board.Clear(this.trackingPiece);
+
+        for (int row = current; row >= bottom; row--)
+        {
+            position.y = row;
+
+            if (this.board.IsValidPosition(this.trackingPiece, position))
+            {
+                this.position = position;
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        this.board.Set(this.trackingPiece);
     }
 
     private void Set()

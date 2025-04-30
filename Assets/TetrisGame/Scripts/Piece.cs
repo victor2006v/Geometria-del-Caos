@@ -187,7 +187,7 @@ public class Piece : MonoBehaviour
         return false;
     }
 
-    private int GetWallKickIndex(int rodationIndex, int rotationDirection) 
+    private int GetWallKickIndex(int rotationIndex, int rotationDirection) 
     {
         int wallKickIndex = rotationIndex * 2;
 
