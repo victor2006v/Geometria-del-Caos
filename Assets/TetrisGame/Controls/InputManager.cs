@@ -14,20 +14,17 @@ public class InputManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance != null && instance != this)
-        {
+        if (instance != null && instance != this){
             Destroy(gameObject);
         }
-        else
-        {
+        else{
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this.gameObject);
         }
         playerInput = GetComponent<PlayerInput>();
         menuOpenCloseAction = playerInput.actions["MenuOpenClose"];
     }
-    private void Update()
-    {
+    private void Update(){
         MenuOpenCloseInput = menuOpenCloseAction.WasPressedThisFrame();
     }
 }
