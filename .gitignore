@@ -110,7 +110,6 @@ Thumbs.db
 # ignore compiled files
 *.com
 *.class
-*.dll
 *.exe
 *.o
 *.so
