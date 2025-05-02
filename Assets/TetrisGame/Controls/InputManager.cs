@@ -19,7 +19,8 @@ public class InputManager : MonoBehaviour
         }
         else{
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            transform.parent = null;
+            DontDestroyOnLoad(gameObject);
         }
         playerInput = GetComponent<PlayerInput>();
         menuOpenCloseAction = playerInput.actions["MenuOpenClose"];

@@ -1224,11 +1224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputActionMapping: {fileID: -944628639613478452, guid: da613a3a355b22c488621fe6043ab8a5, type: 3}
-<<<<<<< HEAD
-=======
-  stepDelay: 1
-  lockDelay: 0.5
->>>>>>> 970321c7a40b18f20848799e0d4aae37d50ce213
 --- !u!1 &2056590928
 GameObject:
   m_ObjectHideFlags: 0
