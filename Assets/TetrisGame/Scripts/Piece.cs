@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Android;
 using UnityEngine.InputSystem;
@@ -6,9 +8,8 @@ using static GeometriaDelCaos;
 
 public class Piece : MonoBehaviour
 {
-
     [SerializeField] InputActionAsset inputActionMapping;
-    InputAction right, left, rotation_left, rotation_right, down, blockPiece;
+    InputAction right, left, rotation_left, rotation_right, down, blockPiece, savePiece;
     public Board board { get; private set; }
     public PiecesData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
@@ -16,11 +17,30 @@ public class Piece : MonoBehaviour
     public int rotationIndex { get; private set; }
 
     public float stepDelay = 1f;
-    public float lockDelay = 0.5f;
+    public float lockDelay = 0.01f;
 
     private float stepTime;
     private float lockTime;
+    private float playTimeEasy = 10f;
+    private float playTime = 10f;
+    private int cont = 0;
 
+    private bool hasAugmentedEasy = false;
+    private bool hasAugmentedMedium = false;
+    private bool hasAugmentedHard = false;
+
+    private float downRepeatDelay = 0.1f;
+    private float nextDownTime = 0f;
+    private float horizontalRepeatDelay = 0.15f;
+    private float horizontalInitialDelay = 0.25f;
+    private float nextHorizontalTime = 0f;
+    private int horizontalDirection = 0;
+    private bool wasHoldingHorizontal = false;
+
+    [SerializeField]
+    GameObject Music;
+    [SerializeField]
+    AudioClip difficultyChange;
 
     public void Awake(){
         inputActionMapping.Enable();
@@ -30,6 +50,7 @@ public class Piece : MonoBehaviour
         rotation_right = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Right");
         down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
+        savePiece = inputActionMapping.FindActionMap("Controls").FindAction("SavePiece");
     }
     public void Initialize(Board board, Vector3Int position, PiecesData data) { 
         this.board = board;
@@ -54,10 +75,19 @@ public class Piece : MonoBehaviour
 
         this.lockTime += Time.deltaTime;
 
-        if (right.triggered) {
-            Move(Vector2Int.right);
-        } else if (left.triggered) {
-            Move(Vector2Int.left);
+        bool leftHeld = left.IsPressed();
+        bool rightHeld = right.IsPressed();
+
+        if (leftHeld && !rightHeld) {
+            HorizontalHold(-1)  ;
+        } else if (rightHeld && !leftHeld) {
+            HorizontalHold(1);
+        }
+        else
+        {
+            horizontalDirection = 0;
+            wasHoldingHorizontal = false;
+            nextHorizontalTime = Time.time;
         }
 
         if (rotation_left.triggered) {
@@ -66,21 +96,93 @@ public class Piece : MonoBehaviour
             Rotate(1); 
         }
 
-        if(down.triggered)
+        if (down.IsPressed())
         {
-            Move(Vector2Int.down);
+            if (Time.time >= nextDownTime)
+            {
+                Move(Vector2Int.down);
+                nextDownTime = Time.time + downRepeatDelay;
+            }
+        }
+        else
+        {
+            nextDownTime = Time.time;
         }
 
         if (blockPiece.triggered) {
             HardDrop();
         }
 
-        if(Time.time >= this.stepTime) 
+        if (Time.time >= this.stepTime) 
         {
             Step();
         }
 
+        if (savePiece.triggered)
+        {
+            SavePiece();
+        }
+
+        if (Time.time >= this.playTimeEasy && !hasAugmentedEasy)
+        {
+            AugmentDifficulty();
+        }
+
+        if (Time.time >= this.playTime + this.playTimeEasy && !hasAugmentedMedium)
+        {
+            AugmentDifficulty();
+        }
+
+        if (Time.time >= this.playTime * 2 + this.playTimeEasy && !hasAugmentedHard)
+        {
+            AugmentDifficulty();
+        }
+
         this.board.Set(this);
+    }
+
+    private void HorizontalHold(int direction)
+    {
+        if (horizontalDirection != direction || !wasHoldingHorizontal)
+        {
+            Move(new Vector2Int(direction, 0));
+            horizontalDirection = direction;
+            nextHorizontalTime = Time.time + horizontalInitialDelay;
+            wasHoldingHorizontal = true;
+        }
+        else if (Time.time >= nextHorizontalTime)
+        {
+            Move(new Vector2Int(direction, 0));
+            nextHorizontalTime = Time.time + horizontalRepeatDelay;
+        }
+    }
+
+    private void AugmentDifficulty()
+    {
+        stepDelay -= 0.3f;
+        Music.GetComponent<AudioSource>().pitch += 0.1f;
+        hasAugmentedEasy = true;
+        if (cont == 1)
+        {
+            hasAugmentedMedium = true;
+        }
+        else if (cont == 2) {
+            hasAugmentedHard = true;
+        }
+        Music.GetComponent<AudioSource>().volume = 0;
+        AudioSource.PlayClipAtPoint(difficultyChange, new Vector3 () ,1f);
+        Invoke("BGMaxVolume", 1.2f);
+        cont++;
+    }
+
+    private void BGMaxVolume()
+    {
+        Music.GetComponent<AudioSource>().volume = 1f;
+    }
+
+    private void SavePiece()
+    {
+        this.board.savePiece();
     }
 
     private void Step()
