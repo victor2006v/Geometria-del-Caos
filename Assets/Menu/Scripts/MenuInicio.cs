@@ -85,4 +85,7 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.Log("Leaving...");
         Application.Quit();
     }
+    public void Settings() {
+        SceneManager.LoadScene(sceneIndex);
+    }
 }
