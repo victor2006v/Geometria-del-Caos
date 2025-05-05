@@ -9,8 +9,6 @@ public class PiecesMovement : MonoBehaviour {
     public RectTransform canvasTransform;
     [SerializeField] Sprite[] sprites;
     public Image pieceImage;
-    private float spawnTimer = 0f;
-    private float spawnInterval = 2f; // Every 2 seconds spawn a piece
 
     public enum PieceType {
         Type1,
@@ -32,6 +30,7 @@ public class PiecesMovement : MonoBehaviour {
     private void FixedUpdate() {
         rb.velocity = new Vector2(rb.velocity.x, -speed);
     }
+    
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Floor")) { 
             Destroy(this.gameObject);

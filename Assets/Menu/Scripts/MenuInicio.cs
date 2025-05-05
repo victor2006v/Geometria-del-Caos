@@ -86,6 +86,10 @@ public class NewBehaviourScript : MonoBehaviour
         Application.Quit();
     }
     public void Settings() {
-        SceneManager.LoadScene(sceneIndex);
+        SceneManager.LoadScene(1);
+
+    }
+    public void Back() {
+        SceneManager.LoadScene(0);
     }
 }
