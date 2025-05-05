@@ -3,6 +3,7 @@ using System.Threading;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 /*We need it to use methods from Pieces class GeometriaDelCaos*/
 using static GeometriaDelCaos;
 
@@ -28,6 +29,9 @@ public class Board : MonoBehaviour
     private PiecesData savePieceData;
     private bool hasSaved;
     private bool hasSavedPiece;
+    [SerializeField]
+    private TMP_Text scoreText;
+    public int score { get; set; }
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
     {
@@ -63,6 +67,11 @@ public class Board : MonoBehaviour
     {
         this.nextPieceData = GetRandomPieceData();
         SpawnPiece();
+    }
+
+    private void Update()
+    {
+        scoreText.text = score.ToString();
     }
 
     private PiecesData GetRandomPieceData()
@@ -220,17 +229,28 @@ public class Board : MonoBehaviour
     {
         RectInt bounds = this.Bounds;
         int row = bounds.yMin;
+        int contLineas = 0;
 
         while (row < bounds.yMax)
         {
             if (IsLineFull(row))
             {
                 LineClear(row);
+                contLineas++;
             }
             else
             {
                 row++;
             }
+        }
+
+        if (contLineas == 4)
+        {
+            score += 1200;
+        }
+        else
+        {
+            score += contLineas * 100;
         }
     }
 

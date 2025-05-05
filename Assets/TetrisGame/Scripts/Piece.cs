@@ -21,8 +21,8 @@ public class Piece : MonoBehaviour
 
     private float stepTime;
     private float lockTime;
-    private float playTimeEasy = 10f;
-    private float playTime = 10f;
+    private float playTimeEasy = 120f;
+    private float playTime = 300f;
     private int cont = 0;
 
     private bool hasAugmentedEasy = false;
@@ -199,6 +199,7 @@ public class Piece : MonoBehaviour
 
     private void Lock() {
         this.board.Set(this);
+        this.board.score += 10;
         this.board.clearLines();
         this.board.SpawnPiece();
     }
