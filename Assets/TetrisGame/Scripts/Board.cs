@@ -30,8 +30,11 @@ public class Board : MonoBehaviour
     private bool hasSaved;
     private bool hasSavedPiece;
     [SerializeField]
-    private TMP_Text scoreText;
+    private TMP_Text scoreText, levelText, linesText, timeText;
     public int score { get; set; }
+    public int level { get; set; } = 1;
+    public int lines { get; set; } = 0;
+    public float time { get; set; }
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
     {
@@ -72,6 +75,10 @@ public class Board : MonoBehaviour
     private void Update()
     {
         scoreText.text = score.ToString();
+        levelText.text = level.ToString();
+        linesText.text = lines.ToString();
+        time += Time.deltaTime;
+        timeText.text = time.ToString("F2");
     }
 
     private PiecesData GetRandomPieceData()
@@ -293,6 +300,7 @@ public class Board : MonoBehaviour
             }
             row++;
         }
+        lines++;    
     }
 }
 

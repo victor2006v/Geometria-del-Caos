@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.Android;
@@ -37,10 +38,15 @@ public class Piece : MonoBehaviour
     private int horizontalDirection = 0;
     private bool wasHoldingHorizontal = false;
 
+    private int lockDelayMoveLimit = 15;
+    private int lockDelayMoves = 0;
+
     [SerializeField]
     GameObject Music;
     [SerializeField]
     AudioClip difficultyChange;
+    [SerializeField]
+    GameObject starAnimationPrefab;
 
     public void Awake(){
         inputActionMapping.Enable();
@@ -59,6 +65,7 @@ public class Piece : MonoBehaviour
         this.rotationIndex = 0;
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
+        this.lockDelayMoves = 0;
 
         if (this.cells == null) { 
             this.cells = new Vector3Int[data.cells.Length];
@@ -137,7 +144,7 @@ public class Piece : MonoBehaviour
         {
             AugmentDifficulty();
         }
-
+         
         this.board.Set(this);
     }
 
@@ -161,6 +168,7 @@ public class Piece : MonoBehaviour
     {
         stepDelay -= 0.3f;
         Music.GetComponent<AudioSource>().pitch += 0.1f;
+        this.board.level++;
         hasAugmentedEasy = true;
         if (cont == 1)
         {
@@ -189,9 +197,9 @@ public class Piece : MonoBehaviour
     {
         this.stepTime = Time.time + this.stepDelay;
 
-        Move(Vector2Int.down);
+        bool moved = Move(Vector2Int.down);
 
-        if(this.lockTime >= this.lockDelay)
+        if(!moved && this.lockTime >= this.lockDelay)
         {
             Lock();
         }
@@ -200,8 +208,35 @@ public class Piece : MonoBehaviour
     private void Lock() {
         this.board.Set(this);
         this.board.score += 10;
+
+        SpawnStar();
+
         this.board.clearLines();
         this.board.SpawnPiece();
+    }
+
+    private void SpawnStar()
+    {
+        int minY = int.MaxValue;
+        List<Vector3Int> bottomCells = new List<Vector3Int>();
+
+        foreach (var cell in cells)
+        {
+            if (cell.y < minY)
+            {
+                minY = cell.y;
+            }
+        }
+
+        foreach (var cell in cells)
+        {
+            if (cell.y == minY)
+            {
+                Vector3Int localPos = cell + position;
+                Vector3 worldPos = new Vector3(localPos.x + 0.5f, localPos.y, 0);
+                Instantiate(starAnimationPrefab, worldPos, Quaternion.identity);
+            }
+        }
     }
 
     /*To block the piece*/
@@ -223,7 +258,11 @@ public class Piece : MonoBehaviour
 
         if (valid) {
             this.position = newPosition;
-            this.lockTime = 0f;
+            if (translation.y >= 0 && lockDelayMoves < lockDelayMoveLimit)
+            {
+                this.lockTime = 0f;
+                lockDelayMoves++;
+            }
         }
         return valid;
     }
@@ -245,6 +284,14 @@ public class Piece : MonoBehaviour
         {
             this.rotationIndex = originalRotation;
             ApplyRotationMatrix(-direction);
+        }
+        else
+        {
+            if (lockDelayMoves < lockDelayMoveLimit)
+            {
+                this.lockTime = 0f;
+                lockDelayMoves++;
+            }
         }
     }
 
