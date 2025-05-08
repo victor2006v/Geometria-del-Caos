@@ -10,6 +10,8 @@ public class Ghost : MonoBehaviour
     public Board board;
     public Piece trackingPiece;
 
+    public bool ghostPiece = true;
+
     public Tilemap tilemap {  get; private set; }
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
@@ -18,6 +20,15 @@ public class Ghost : MonoBehaviour
     {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.cells = new Vector3Int[4];
+
+        if (ghostPiece)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void LateUpdate()
