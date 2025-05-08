@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     [Header("Menu Objects")]
@@ -13,8 +14,9 @@ public class MenuManager : MonoBehaviour
     private bool isPaused;
 
     private void Start(){
+        
         mainMenuCanvasGO.SetActive(false);
-        settingsMenuCanvasGO.SetActive(false);
+        settingsMenuCanvasGO.SetActive(true);
     }
 
     private void Update()
@@ -74,7 +76,7 @@ public class MenuManager : MonoBehaviour
     #region Settings Menu Button Actions
 
     public void OnSettingsBackMenu() {
-        OpenMainMenu();
+        SceneManager.LoadScene(0);
     }
     #endregion
 }
