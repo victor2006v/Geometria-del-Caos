@@ -7,7 +7,7 @@ public class Statistics : MonoBehaviour
 {
     public int counterClicks;
     private float timer = 0f;
-    public float timeInterval = 2f; // Interval to print clicks
+    private float timeInterval = 2f; // Interval to print clicks
     /*To Initialize the clicks*/
     private void Awake()
     {

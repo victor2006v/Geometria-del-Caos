@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -93,38 +93,69 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: upscalemedia-transformed_10
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 160
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8061531e2fd49b745934140ded68c9a7
-      internalID: -1672554811
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_12
+      name: TetrisTiles_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 80
-        width: 80
-        height: 80
+        y: 323
+        width: 53
+        height: 77
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -132,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4d8e029f736ee4b4db445d386ce8870a
-      internalID: -1215815516
+      spriteID: 7be40f5dd6e4fa643bd3732e2a471f12
+      internalID: -1603313893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_14
+      name: TetrisTiles_1
       rect:
         serializedVersion: 2
-        x: 160
-        y: 80
-        width: 80
-        height: 80
+        x: 75
+        y: 347
+        width: 74
+        height: 53
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4338c9eb14d6e8946a98fbb4a26b1dc7
-      internalID: 244018033
+      spriteID: a89ee6bb39155b348b5bd1948f4167f2
+      internalID: 381387609
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_16
+      name: TetrisTiles_2
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 80
-        height: 80
+        x: 155
+        y: 331
+        width: 74
+        height: 69
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -174,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1536e40ef8405bf49a8907b8c9798ac5
-      internalID: -1686103685
+      spriteID: 212b3a39709a79646997fff4ef59f90c
+      internalID: -1254887443
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_18
+      name: TetrisTiles_3
       rect:
         serializedVersion: 2
-        x: 160
-        y: 0
-        width: 80
-        height: 80
+        x: 235
+        y: 339
+        width: 58
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -195,41 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f65412f9cdbd9f249adaa3c7ad9a093d
-      internalID: -1461940280
+      spriteID: 8ebfa8204bff1d546bfb481858ba7841
+      internalID: -532013513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_19
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c900cb62ef872ab44b0184e76d1b9533
-      internalID: -543645680
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_0
+      name: TetrisTiles_4
       rect:
         serializedVersion: 2
         x: 0
-        y: 320
-        width: 80
-        height: 80
+        y: 171
+        width: 68
+        height: 68
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -237,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dea920cad7b7dd941bbc6b329cfc338f
-      internalID: 2020356052
+      spriteID: acebe91f1d2063d46bc7fee10c63a389
+      internalID: 215675405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_1
+      name: TetrisTiles_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 320
-        width: 80
-        height: 80
+        x: 155
+        y: 259
+        width: 58
+        height: 66
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bc45faa987c81743a8999450bcae314
-      internalID: -1120294135
+      spriteID: c0f1a2d62642449448bc8e8e5d8757fd
+      internalID: -1183242193
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_2
+      name: TetrisTiles_6
       rect:
         serializedVersion: 2
-        x: 160
-        y: 320
-        width: 80
-        height: 80
+        x: 155
+        y: 171
+        width: 74
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -279,20 +289,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5fb69b8a63701e34fbbb12048e221a23
-      internalID: 1399076942
+      spriteID: afa661c1af99b1746ad0d302c166b7f8
+      internalID: 740308394
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_3
+      name: TetrisTiles_7
       rect:
         serializedVersion: 2
-        x: 240
-        y: 320
-        width: 80
-        height: 80
+        x: 235
+        y: 171
+        width: 58
+        height: 74
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -300,83 +310,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e2a6600a2dd9e146abf6ad8f3ee8be0
-      internalID: 1463489259
+      spriteID: b5f7417e1358d6d42b084ead82792a7e
+      internalID: -1836130628
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e881f88672bbeb24099b4019ff850503
-      internalID: -1503634184
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_5
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 046c63cade8fee24c90c008f1cdf6ac6
-      internalID: 1862323878
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_6
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 240
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d50d36d1395bf27418587ddd5561fe48
-      internalID: 1873859174
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_8
+      name: TetrisTiles_8
       rect:
         serializedVersion: 2
         x: 0
-        y: 160
-        width: 80
-        height: 80
+        y: 107
+        width: 69
+        height: 58
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -384,20 +331,167 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e22808af20dcc72408915346ad2d2ffd
-      internalID: 1934436515
+      spriteID: 31f0bff9bbd06d0409b95e7aa793050a
+      internalID: 1510783782
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_9
+      name: TetrisTiles_9
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 83
+        width: 58
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e87ae44f3258445a17b670f9768f50
+      internalID: 1187563633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_10
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 107
+        width: 74
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f8defb4f2502de43b996db359b563a7
+      internalID: -309989016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_11
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 87
+        width: 58
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8db2c28b3c1384045b02215949856b21
+      internalID: -2142618410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 19
+        width: 69
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3edb81beffc660d448a7cfc2202e76aa
+      internalID: -256640914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_13
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 19
+        width: 74
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 04c6a3959dbcc9d45b271c0fc5ee6982
+      internalID: -395348628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_14
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 11
+        width: 58
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b34f599b9442a5e4e856d059d900b566
+      internalID: 1075230189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_15
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 13
+        width: 64
+        height: 68
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f460351387e09b4e9cc75d2819c533f
+      internalID: 837507192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TetrisTiles_16
       rect:
         serializedVersion: 2
         x: 80
-        y: 160
-        width: 80
-        height: 80
+        y: 241
+        width: 36
+        height: 84
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -405,20 +499,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5427f9f15f5ce44d8833d14e474bd99
-      internalID: 1617497953
+      spriteID: fdfaf92acbd705c4e8260ac54d514347
+      internalID: -1228607219
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_11
+      name: TetrisTiles_17
       rect:
         serializedVersion: 2
-        x: 240
-        y: 160
-        width: 80
-        height: 80
+        x: 81
+        y: 177
+        width: 47
+        height: 61
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -426,20 +520,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78ea701fdd5a0ab4b96bb22c447d73ac
-      internalID: -1150509768
+      spriteID: 409546c3a58734d49a2e10ee062bb907
+      internalID: 1329094213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: upscalemedia-transformed_13
+      name: TetrisTiles_18
       rect:
         serializedVersion: 2
-        x: 80
-        y: 80
+        x: 0
+        y: 250
         width: 80
-        height: 80
+        height: 71
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -447,50 +541,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3ea53d4baa9813c4390982b89f981b33
-      internalID: 1113794695
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_15
-      rect:
-        serializedVersion: 2
-        x: 240
-        y: 80
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dc04d61891bf45940b5b373f7660df80
-      internalID: -2129034941
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: upscalemedia-transformed_17
-      rect:
-        serializedVersion: 2
-        x: 80
-        y: 0
-        width: 80
-        height: 80
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4642edf4ff28714780d4704b0dfbb19
-      internalID: 1981036245
+      spriteID: abb00b14b4c3aa94f9dadbe622472003
+      internalID: -4200427
       vertices: []
       indices: 
       edges: []
@@ -506,26 +558,25 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      upscalemedia-transformed_0: 2020356052
-      upscalemedia-transformed_1: -1120294135
-      upscalemedia-transformed_10: -1672554811
-      upscalemedia-transformed_11: -1150509768
-      upscalemedia-transformed_12: -1215815516
-      upscalemedia-transformed_13: 1113794695
-      upscalemedia-transformed_14: 244018033
-      upscalemedia-transformed_15: -2129034941
-      upscalemedia-transformed_16: -1686103685
-      upscalemedia-transformed_17: 1981036245
-      upscalemedia-transformed_18: -1461940280
-      upscalemedia-transformed_19: -543645680
-      upscalemedia-transformed_2: 1399076942
-      upscalemedia-transformed_3: 1463489259
-      upscalemedia-transformed_4: -1503634184
-      upscalemedia-transformed_5: 1862323878
-      upscalemedia-transformed_6: 1873859174
-      upscalemedia-transformed_7: -211037913
-      upscalemedia-transformed_8: 1934436515
-      upscalemedia-transformed_9: 1617497953
+      TetrisTiles_0: -1603313893
+      TetrisTiles_1: 381387609
+      TetrisTiles_10: -309989016
+      TetrisTiles_11: -2142618410
+      TetrisTiles_12: -256640914
+      TetrisTiles_13: -395348628
+      TetrisTiles_14: 1075230189
+      TetrisTiles_15: 837507192
+      TetrisTiles_16: -1228607219
+      TetrisTiles_17: 1329094213
+      TetrisTiles_18: -4200427
+      TetrisTiles_2: -1254887443
+      TetrisTiles_3: -532013513
+      TetrisTiles_4: 215675405
+      TetrisTiles_5: -1183242193
+      TetrisTiles_6: 740308394
+      TetrisTiles_7: -1836130628
+      TetrisTiles_8: 1510783782
+      TetrisTiles_9: 1187563633
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

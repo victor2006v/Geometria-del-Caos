@@ -7,6 +7,7 @@ TagManager:
   - MainMenu
   - DifficultyMenu
   - Floor
+  - Bounce
   layers:
   - Default
   - TransparentFX

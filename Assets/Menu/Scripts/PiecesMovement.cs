@@ -45,8 +45,6 @@ public class PiecesMovement : MonoBehaviour {
         rectTransform.anchorMin = new Vector2(0.5f, 1f);  // Anclaje en el centro horizontal, arriba
         rectTransform.anchorMax = new Vector2(0.5f, 1f);  // Mismo valor que anchorMin para que se quede en el borde
 
-        // Colocamos la pieza en la parte superior del Canvas
-        rectTransform.anchoredPosition = new Vector2(600f, -10f);
         RandomPieceType();
         SetPiece(pieceType);
     }

@@ -93,16 +93,16 @@ MonoBehaviour:
   speed: 350
   canvasTransform: {fileID: 0}
   sprites:
-  - {fileID: 2020356052, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: -1120294135, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: 1399076942, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: 1873859174, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: 1862323878, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: 1873859174, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: -1672554811, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: -2129034941, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: -1461940280, guid: be527ab52089793439dc9c59c7b51279, type: 3}
-  - {fileID: -543645680, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -1603313893, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: 381387609, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -1254887443, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -1183242193, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: 740308394, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: 837507192, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: 1510783782, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -256640914, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -1836130628, guid: be527ab52089793439dc9c59c7b51279, type: 3}
+  - {fileID: -309989016, guid: be527ab52089793439dc9c59c7b51279, type: 3}
   pieceImage: {fileID: 703006713853627851}
   pieceType: 0
 --- !u!50 &8088696034153775737

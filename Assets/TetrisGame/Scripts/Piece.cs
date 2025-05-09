@@ -9,46 +9,67 @@ using static GeometriaDelCaos;
 
 public class Piece : MonoBehaviour
 {
+    //It stores the inputAction mapping context
     [SerializeField] InputActionAsset inputActionMapping;
+    //Here we save a reference with all the different types of InputActions in the mapping context
     InputAction right, left, rotation_left, rotation_right, down, blockPiece, savePiece;
+
+    //Reference to the GameObject that has the music
+    [SerializeField]
+    GameObject Music;
+    //The sound that we can hear when the difficulty changes    
+    [SerializeField]
+    AudioClip difficultyChange;
+
+    [SerializeField]
+    GameObject starAnimationPrefab;
+
+    //Reference of the board    
     public Board board { get; private set; }
+    
     public PiecesData data { get; private set; }
     public Vector3Int[] cells { get; private set; }
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; }
-
+    //1s every time the piece is falling
     public float stepDelay = 1f;
-    public float lockDelay = 0.01f;
+    //0.5s that you have to move the piece in the ground before lock
+    public float lockDelay;
+    
 
     private float stepTime;
     private float lockTime;
+    //PlayTimeEasy to pass from level 1 to 2, are 2 minutes
     private float playTimeEasy = 120f;
+    //PlayTime to pass from level 2 to 3, are 5 minutes
     private float playTime = 300f;
+    //When the difficulty has changed it increases
     private int cont = 0;
-
+    //3 boolean variables to know where we are in the difficulty
     private bool hasAugmentedEasy = false;
     private bool hasAugmentedMedium = false;
     private bool hasAugmentedHard = false;
 
+    //It's a little delay where we go down
     private float downRepeatDelay = 0.1f;
+    //We start with 0f but if we press down and we hold it we can go down, if not we have the piece in gravity.
     private float nextDownTime = 0f;
+    //Delay to move horizontal if we hold the A or D, arrow left or right or the left joystick
     private float horizontalRepeatDelay = 0.15f;
+    //The Initial Delay the pieces have horizontally
     private float horizontalInitialDelay = 0.25f;
-    private float nextHorizontalTime = 0f;
-    private int horizontalDirection = 0;
-    private bool wasHoldingHorizontal = false;
 
+    private float nextHorizontalTime = 0f;
+    //We save if the direction is left or right
+    private int horizontalDirection = 0;
+    //A boolean to knwo if the horizontal input actions are hold
+    private bool wasHoldingHorizontal = false;
+    //The amount of possible movements, it sets the limit with 15 and lockDelayMoves counts the amount of moves that has.
     private int lockDelayMoveLimit = 15;
     private int lockDelayMoves = 0;
 
-    [SerializeField]
-    GameObject Music;
-    [SerializeField]
-    AudioClip difficultyChange;
-    [SerializeField]
-    GameObject starAnimationPrefab;
-
-    public void Awake(){
+    //We save a reference of every Input Action in the Action Map
+    private void Awake(){
         inputActionMapping.Enable();
         right = inputActionMapping.FindActionMap("Controls").FindAction("Right");
         left = inputActionMapping.FindActionMap("Controls").FindAction("Left");
@@ -58,10 +79,14 @@ public class Piece : MonoBehaviour
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
         savePiece = inputActionMapping.FindActionMap("Controls").FindAction("SavePiece");
     }
+    /**
+     * Params. Board board: a reference to get the board, the position and the data, which contains how is the piece behaviour
+     */
     public void Initialize(Board board, Vector3Int position, PiecesData data) { 
         this.board = board;
         this.position = position;
         this.data = data;
+
         this.rotationIndex = 0;
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
@@ -148,8 +173,7 @@ public class Piece : MonoBehaviour
         this.board.Set(this);
     }
 
-    private void HorizontalHold(int direction)
-    {
+    private void HorizontalHold(int direction){
         if (horizontalDirection != direction || !wasHoldingHorizontal)
         {
             Move(new Vector2Int(direction, 0));
