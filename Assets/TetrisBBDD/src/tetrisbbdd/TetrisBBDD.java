@@ -18,10 +18,12 @@ public class TetrisBBDD {
     public static void main(String[] args) throws java.io.IOException, SQLException, ClassNotFoundException, InterruptedException {
         System.out.println("Está corriendo.");
         
-        java.io.File game = new java.io.File("C:\\Users\\Argo\\AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosGameData.txt");
+        String userHome = System.getProperty("user.home");
+        java.io.File game = new java.io.File(userHome, "AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosGameData.txt");
         
         long lastModified = game.lastModified();
         
+        while(true){
         Class.forName("com.mysql.cj.jdbc.Driver");
         
         Connection connection = DriverManager.getConnection("jdbc:mysql://dam.inspedralbes.cat/Tetris_BBDD?autoReconnect=true", "Tetris_tetris", "OM8*TBV5yv2O");
@@ -51,7 +53,7 @@ public class TetrisBBDD {
 
         output.close();*/
 
-        while(true){
+        
         Scanner input = new Scanner(game);
 
          if (game.lastModified() != lastModified) {
@@ -94,8 +96,7 @@ public class TetrisBBDD {
                 input.close();
                 lastModified = game.lastModified();
             }
+         connection.close();
         }
-        connection.close();
-    
     }
 }

@@ -1,44 +1,31 @@
+using System;
 using System.Diagnostics;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEditor;
+using System.IO;
 
 public class JavaExecutor : MonoBehaviour
 {
     private Thread javaThread;
     private Process javaProcess;
-    private bool isJavaRunning = false;
 
     void Start()
     {
-        if (!isJavaRunning)
-        {
-            javaThread = new Thread(RunJavaProgram);
-            javaThread.Start();
-        }
-        else
-        {
-            UnityEngine.Debug.LogWarning("El proceso java ya está en ejecución.");
-        }
+        javaThread = new Thread(RunJavaProgram);
+        javaThread.Start();
     }
 
     void RunJavaProgram()
     {
         try
         {
-            isJavaRunning = true;
-
-            if (javaProcess != null && !javaProcess.HasExited)
-            {
-                UnityEngine.Debug.LogWarning("El proceso Java ya está en ejecución.");
-                return;
-            }
-
             javaProcess = new Process();
             javaProcess.StartInfo.FileName = "java";
 
-            string jarPath = "C:\\Users\\Argo\\Desktop\\Geometria-del-Caos\\Assets\\TetrisBBDD\\lib\\mysql-connector-j-9.3.0\\mysql-connector-j-9.3.0.jar";
-            string srcPath = "C:\\Users\\Argo\\Desktop\\Geometria-del-Caos\\Assets\\TetrisBBDD\\src";
+            string jarPath = Path.Combine(Application.streamingAssetsPath, "TetrisBBDD", "lib", "mysql-connector-j-9.3.0", "mysql-connector-j-9.3.0.jar");
+            string srcPath = Path.Combine(Application.streamingAssetsPath, "TetrisBBDD", "src");
 
             javaProcess.StartInfo.Arguments = $"-cp \"{srcPath};{jarPath}\" tetrisbbdd.TetrisBBDD";
             javaProcess.StartInfo.RedirectStandardOutput = true;
@@ -58,21 +45,27 @@ public class JavaExecutor : MonoBehaviour
         {
             UnityEngine.Debug.LogError("Java Execution Error: " + ex.Message);
         }
-        finally
-        {
-            isJavaRunning = false;
-        }
+    }
 
-        void OnApplicationQuit()
+    void OnApplicationQuit()
+    {
+        KillExistingJavaProcess();
+    }
+
+    private void KillExistingJavaProcess()
+    {
+        Process[] javaProcesses = Process.GetProcessesByName("java");
+        foreach (Process process in javaProcesses)
         {
-            if (javaProcess != null && !javaProcess.HasExited)
+            try
             {
-                javaProcess.Kill();
-                javaProcess.WaitForExit();
+                process.Kill();
+                process.WaitForExit();
+                UnityEngine.Debug.Log("Proceso Java existente cerrado");
             }
-            if (javaThread != null && javaThread.IsAlive)
+            catch (System.Exception ex)
             {
-                javaThread.Join();
+                UnityEngine.Debug.LogError("Error cerrando el proceso de java existente: " + ex.Message);
             }
         }
     }
