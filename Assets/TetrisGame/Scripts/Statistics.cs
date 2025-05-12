@@ -19,7 +19,6 @@ public class Statistics : MonoBehaviour
     }
     // Update is called once per frame
     private void Update(){
-        Invoke("imprimirClicks", 2f);
     }
 
 }

@@ -2,33 +2,37 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AccionesMenu : MonoBehaviour{
-    [SerializeField] GameObject KeyboardCanvas;
-    [SerializeField] GameObject SettingsCanvas;
-    [SerializeField] GameObject GamepadCanvas;
+    [SerializeField] GameObject KeyboardPanel;
+    [SerializeField] GameObject SettingsPanel;
+    [SerializeField] GameObject GamepadPanel;
 
     [SerializeField] private Statistics statistics;
+    private void Start()
+    {
+        SettingsPanel.SetActive(true);
+    }
     public void Back(){ 
         SceneManager.LoadScene(0);
         this.statistics.counterClicks++;
     }
     public void Keyboard() {
 
-        KeyboardCanvas.SetActive(true);
-        SettingsCanvas.SetActive(false);
-        GamepadCanvas.SetActive(false);
+        KeyboardPanel.SetActive(true);
+        SettingsPanel.SetActive(false);
+        GamepadPanel.SetActive(false);
         this.statistics.counterClicks++;
     }
     public void BackSettings()
     {
-        SettingsCanvas.SetActive(true);
-        KeyboardCanvas.SetActive(false);
-        GamepadCanvas.SetActive(false);
+        SettingsPanel.SetActive(true);
+        KeyboardPanel.SetActive(false);
+        GamepadPanel.SetActive(false);
         this.statistics.counterClicks++;
     }
     public void Gamepad() {
-        GamepadCanvas.SetActive(true);
-        SettingsCanvas.SetActive(false);
-        KeyboardCanvas.SetActive(false);
+        GamepadPanel.SetActive(true);
+        SettingsPanel.SetActive(false);
+        KeyboardPanel.SetActive(false);
         this.statistics.counterClicks++;
     }
 }

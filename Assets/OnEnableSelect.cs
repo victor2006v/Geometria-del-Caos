@@ -10,4 +10,10 @@ public class OnEnableSelect : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(objectToSelect);
     }
+    private void Update(){
+        if (Input.GetMouseButtonDown(0)){
+            EventSystem.current.SetSelectedGameObject(objectToSelect);
+        }
+    }
+    
 }

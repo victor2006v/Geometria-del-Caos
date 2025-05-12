@@ -24,6 +24,7 @@ public class Ghost : MonoBehaviour
         if (ghostPiece)
         {
             gameObject.SetActive(true);
+            Debug.Log("Activado");
         }
         else
         {
