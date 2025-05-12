@@ -9,6 +9,8 @@ using static GeometriaDelCaos;
 
 public class Board : MonoBehaviour
 {
+    [SerializeField] AudioClip holdSFX, singleSFX, doubleSFX, tripleSFX, tetrisSFX;
+
     /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
      * Set it can be only modified in this class*/
     public Tilemap tilemap { get; private set; }
@@ -34,6 +36,7 @@ public class Board : MonoBehaviour
     public int score { get; set; }
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
+    private int previousLines = 0;
     public float time { get; set; }
 
     [SerializeField] GameObject gameData;
@@ -81,6 +84,12 @@ public class Board : MonoBehaviour
         linesText.text = lines.ToString();
         time += Time.deltaTime;
         timeText.text = time.ToString("F2");
+
+        if(lines > previousLines)
+        {
+            previousLines = lines;
+            this.activePiece.AugmentDifficulty();
+        }
     }
 
     private PiecesData GetRandomPieceData()
@@ -143,6 +152,7 @@ public class Board : MonoBehaviour
         {
             savePieceData = activePiece.data;
             hasSavedPiece = true;
+            SoundFXManager.instance.PlaySoundFXClip(holdSFX, transform, 1f, false);
 
             SpawnPiece();
         }
@@ -254,13 +264,25 @@ public class Board : MonoBehaviour
             }
         }
 
-        if (contLineas == 4)
+        if (contLineas == 1)
+        {
+            score += 100;
+            SoundFXManager.instance.PlaySoundFXClip(singleSFX, transform, 1f, false);
+        }
+        else if (contLineas == 2)
+        {
+            score += 200;
+            SoundFXManager.instance.PlaySoundFXClip(doubleSFX, transform, 1f, false);
+        }
+        else if (contLineas == 3)
+        {
+            score += 300;
+            SoundFXManager.instance.PlaySoundFXClip(tripleSFX, transform, 1f, false);
+        }
+        else if (contLineas == 4)
         {
             score += 1200;
-        }
-        else
-        {
-            score += contLineas * 100;
+            SoundFXManager.instance.PlaySoundFXClip(tetrisSFX, transform, 1f, false);
         }
     }
 
