@@ -35,8 +35,6 @@ public class Board : MonoBehaviour
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
     public float time { get; set; }
-
-    [SerializeField] GameObject gameData;
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
     {
@@ -193,7 +191,9 @@ public class Board : MonoBehaviour
 
     /*Function that is called when the player dies*/
     public void GameOver() {
-        gameData.GetComponent<GameDataController>().saveData();
+        GameDataController.instance.saveData();
+        MenuManager.instance.Statistics();
+        MongoConnection.instance.InitializeMongo();
         this.tilemap.ClearAllTiles();
     }
 
