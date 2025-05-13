@@ -21,6 +21,13 @@ public class JavaExecutor : MonoBehaviour
     {
         try
         {
+            string jrePath = Path.Combine(Application.streamingAssetsPath, "JRE", "bin", "java.exe");
+            if (!File.Exists(jrePath))
+            {
+                UnityEngine.Debug.LogError("No se encontró la JRE embebida en: " + jrePath);
+                return;
+            }
+
             javaProcess = new Process();
             javaProcess.StartInfo.FileName = "java";
 
