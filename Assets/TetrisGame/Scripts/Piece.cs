@@ -17,9 +17,10 @@ public class Piece : MonoBehaviour
     //Reference to the GameObject that has the music
     [SerializeField]
     GameObject Music;
-    //The sound that we can hear when the difficulty changes    
+
+    //The different sound effects that we can hear
     [SerializeField]
-    AudioClip difficultyChange;
+    AudioClip difficultyChangeSFX, lastDifficultyChangeSFX, lockSFX, hardDropSFX, rotateSFX, downSFX, moveSFX;
 
     [SerializeField]
     GameObject particleSystemPrefab;
@@ -39,23 +40,13 @@ public class Piece : MonoBehaviour
 
     private float stepTime;
     private float lockTime;
-    //PlayTimeEasy to pass from level 1 to 2, are 2 minutes
-    private float playTimeEasy = 120f;
-    //PlayTime to pass from level 2 to 3, are 5 minutes
-    private float playTime = 300f;
-    //When the difficulty has changed it increases
-    private int cont = 0;
-    //3 boolean variables to know where we are in the difficulty
-    private bool hasAugmentedEasy = false;
-    private bool hasAugmentedMedium = false;
-    private bool hasAugmentedHard = false;
 
     //It's a little delay where we go down
-    private float downRepeatDelay = 0.1f;
+    private float downRepeatDelay = 0.05f;
     //We start with 0f but if we press down and we hold it we can go down, if not we have the piece in gravity.
     private float nextDownTime = 0f;
     //Delay to move horizontal if we hold the A or D, arrow left or right or the left joystick
-    private float horizontalRepeatDelay = 0.15f;
+    private float horizontalRepeatDelay = 0.05f;
     //The Initial Delay the pieces have horizontally
     private float horizontalInitialDelay = 0.25f;
 
@@ -111,7 +102,7 @@ public class Piece : MonoBehaviour
         bool rightHeld = right.IsPressed();
 
         if (leftHeld && !rightHeld) {
-            HorizontalHold(-1)  ;
+            HorizontalHold(-1);
         } else if (rightHeld && !leftHeld) {
             HorizontalHold(1);
         }
@@ -154,21 +145,6 @@ public class Piece : MonoBehaviour
         {
             SavePiece();
         }
-
-        if (Time.time >= this.playTimeEasy && !hasAugmentedEasy)
-        {
-            AugmentDifficulty();
-        }
-
-        if (Time.time >= this.playTime + this.playTimeEasy && !hasAugmentedMedium)
-        {
-            AugmentDifficulty();
-        }
-
-        if (Time.time >= this.playTime * 2 + this.playTimeEasy && !hasAugmentedHard)
-        {
-            AugmentDifficulty();
-        }
          
         this.board.Set(this);
     }
@@ -188,28 +164,38 @@ public class Piece : MonoBehaviour
         }
     }
 
-    private void AugmentDifficulty()
+    public void AugmentDifficulty()
     {
-        stepDelay -= 0.3f;
-        Music.GetComponent<AudioSource>().pitch += 0.1f;
-        this.board.level++;
-        hasAugmentedEasy = true;
-        if (cont == 1)
+        if (this.board.level < 10)
         {
-            hasAugmentedMedium = true;
+            stepDelay -= 0.1f;
         }
-        else if (cont == 2) {
-            hasAugmentedHard = true;
+        if (this.board.level %2 != 0 && this.board.level <= 10)
+        {
+            Music.GetComponent<AudioSource>().pitch += 0.1f;
         }
-        Music.GetComponent<AudioSource>().volume = 0;
-        AudioSource.PlayClipAtPoint(difficultyChange, new Vector3 () ,1f);
-        Invoke("BGMaxVolume", 1.2f);
-        cont++;
+        this.board.level++;
+        if (this.board.level <= 10)
+        {
+            SoundMixerManager.instance.SetMusicFXVolume(-80);
+            SoundMixerManager.instance.SetSoundFXVolume(-80);
+            if (this.board.level < 10)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(difficultyChangeSFX, transform, 1f, true);
+            }
+            else if (this.board.level == 10)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(lastDifficultyChangeSFX, transform, 1f, true);
+            }
+
+            Invoke("BGMaxVolume", 1.2f);
+        }
     }
 
     private void BGMaxVolume()
     {
-        Music.GetComponent<AudioSource>().volume = 1f;
+        SoundMixerManager.instance.SetMusicFXVolume(0f);
+        SoundMixerManager.instance.SetSoundFXVolume(0f);
     }
 
     private void SavePiece()
@@ -237,6 +223,8 @@ public class Piece : MonoBehaviour
 
         this.board.clearLines();
         this.board.SpawnPiece();
+
+        SoundFXManager.instance.PlaySoundFXClip(lockSFX, transform, 1f, false);
     }
 
     private void SpawnStar()
@@ -270,6 +258,8 @@ public class Piece : MonoBehaviour
             continue;
         }
 
+        SoundFXManager.instance.PlaySoundFXClip(hardDropSFX, transform, 1f, false);
+
         Lock();
     }
     /*It moves the piece but before it checks if the position is valid*/
@@ -287,6 +277,14 @@ public class Piece : MonoBehaviour
             {
                 this.lockTime = 0f;
                 lockDelayMoves++;
+            }
+            if (translation.y < 0)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(downSFX, transform, 1f, false);
+            }
+            else if (translation.x > 0 || translation.x < 0)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(moveSFX, transform, 1f, false);
             }
         }
         return valid;
@@ -318,6 +316,8 @@ public class Piece : MonoBehaviour
                 lockDelayMoves++;
             }
         }
+
+        SoundFXManager.instance.PlaySoundFXClip(rotateSFX, transform, 1f, false);
     }
 
     private void ApplyRotationMatrix(int direction)

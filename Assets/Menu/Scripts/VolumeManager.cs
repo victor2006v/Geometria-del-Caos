@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class VolumeManager : MonoBehaviour{
     [SerializeField] Slider volumeSlider;
-
+    private MenuManager menuManager;
     private void Start() {
 
         //By default 100%
@@ -16,7 +16,8 @@ public class VolumeManager : MonoBehaviour{
             Load();
         }
     }
-    public void ChangeVolume() { 
+    public void ChangeVolume() {
+        menuManager.CountClicks();
         AudioListener.volume = volumeSlider.value;
         Save();
     }

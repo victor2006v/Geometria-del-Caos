@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
 {
+    //get a reference to the GameManager
+    public MenuManager menuManager;
+
     [SerializeField] private GameObject MenuPanelDown;
     [SerializeField] private GameObject firstToSelect;
     [SerializeField]
@@ -30,6 +33,7 @@ public class NewBehaviourScript : MonoBehaviour
         EventSystem.current.SetSelectedGameObject(firstToSelect);
     }
     public void Singleplayer(){
+        menuManager.CountClicks();
         speed = speed * -1;
         if (currentCoroutine != null)
         {
@@ -40,10 +44,12 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
     public void Classic(){
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        menuManager.CountClicks();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Return() {
+        menuManager.CountClicks();
         speed = speed * -1;
 
         if (currentCoroutine != null) {
@@ -127,11 +133,12 @@ public class NewBehaviourScript : MonoBehaviour
      * This function is called when the Exit button is triggered
      */
     public void Salir(){
-
+        menuManager.CountClicks();
         Debug.Log("Leaving...");
         Application.Quit();
     }
     public void Settings() {
+        menuManager.CountClicks();
         SceneManager.LoadScene(1);
     }
 }

@@ -14,18 +14,4 @@ public class SaveGameData : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
         Debug.Log("Partida guardada en la BBDD");
     }
-
-    public static void ClearData()
-    {
-        if (File.Exists(Application.persistentDataPath + "GameData.json"))
-        {
-            File.Delete(Application.persistentDataPath + "GameData.json");
-            Debug.Log("Documento eliminado");
-            return;
-        }
-        else
-        {
-            Debug.Log("No existe el documento");
-        }
-    }
 }

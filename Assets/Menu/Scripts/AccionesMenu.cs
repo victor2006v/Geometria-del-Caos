@@ -6,33 +6,31 @@ public class AccionesMenu : MonoBehaviour{
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject GamepadPanel;
 
-    [SerializeField] private Statistics statistics;
-    private void Start()
-    {
+    
+
+    private void Start(){
         SettingsPanel.SetActive(true);
     }
     public void Back(){ 
-        SceneManager.LoadScene(0);
-        this.statistics.counterClicks++;
+        SceneManager.LoadScene(0);;
     }
     public void Keyboard() {
-
+        MenuManager.instance.CountClicks();
         KeyboardPanel.SetActive(true);
         SettingsPanel.SetActive(false);
         GamepadPanel.SetActive(false);
-        this.statistics.counterClicks++;
+
     }
-    public void BackSettings()
-    {
+    public void BackSettings(){
+        MenuManager.instance.CountClicks();
         SettingsPanel.SetActive(true);
         KeyboardPanel.SetActive(false);
         GamepadPanel.SetActive(false);
-        this.statistics.counterClicks++;
     }
     public void Gamepad() {
+        MenuManager.instance.CountClicks();
         GamepadPanel.SetActive(true);
         SettingsPanel.SetActive(false);
         KeyboardPanel.SetActive(false);
-        this.statistics.counterClicks++;
     }
 }
