@@ -14,4 +14,10 @@ public class SaveGameData : MonoBehaviour
         Debug.Log(Application.persistentDataPath);
         Debug.Log("Partida guardada en la BBDD");
     }
+
+    public static void SaveNameInfo(GameDataSerialized game)
+    {
+        string json = JsonUtility.ToJson(game);
+        File.WriteAllText(Application.persistentDataPath + "Name.txt", json);
+    }
 }

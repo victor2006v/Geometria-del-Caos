@@ -32,4 +32,10 @@ public class GameDataController : MonoBehaviour
         gameData.level = 1;
         SaveGameData.SaveDataInfo(gameData);
     }
+
+    public void saveName()
+    {
+        gameData.name = LetterManager.instance.playerName;
+        SaveGameData.SaveNameInfo(gameData);
+    }
 }

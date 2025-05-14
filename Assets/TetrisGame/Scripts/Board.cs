@@ -32,7 +32,9 @@ public class Board : MonoBehaviour
     private bool hasSaved;
     private bool hasSavedPiece;
     [SerializeField]
-    private TMP_Text scoreText, levelText, linesText, timeText;
+    private TMP_Text playerText, scoreText, levelText, linesText, timeText;
+
+    public string player { get; set; }
     public int score { get; set; }
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
@@ -71,7 +73,10 @@ public class Board : MonoBehaviour
     }
     private void Start()
     {
+        player = LetterManager.instance.playerName;
+        playerText.text = player.ToString();
         this.nextPieceData = GetRandomPieceData();
+        GameDataController.instance.saveName();
         SpawnPiece();
     }
 

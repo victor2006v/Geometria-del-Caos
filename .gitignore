@@ -109,7 +109,6 @@ Thumbs.db
 
 # ignore compiled files
 *.com
-*.exe
 *.o
 *.so
 

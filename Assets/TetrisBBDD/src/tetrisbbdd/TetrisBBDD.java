@@ -20,43 +20,49 @@ public class TetrisBBDD {
         
         String userHome = System.getProperty("user.home");
         java.io.File game = new java.io.File(userHome, "AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosGameData.txt");
+        java.io.File nameFile = new java.io.File(userHome, "AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosName.txt");
+        
+        String filePath = userHome + "\\AppData\\LocalLow\\DefaultCompany\\Highscore.dat";
         
         long lastModified = game.lastModified();
         
         while(true){
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        
-        Connection connection = DriverManager.getConnection("jdbc:mysql://dam.inspedralbes.cat/Tetris_BBDD?autoReconnect=true", "Tetris_tetris", "OM8*TBV5yv2O");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
+            Connection connection = DriverManager.getConnection("jdbc:mysql://dam.inspedralbes.cat/Tetris_BBDD?autoReconnect=true", "Tetris_tetris", "OM8*TBV5yv2O");
 
-        PreparedStatement insertGame = connection.prepareStatement("insert into GAME values (null, ?, ?, ?, ?, ?, ?)");
-        PreparedStatement selectPlayer = connection.prepareStatement("select name from PLAYER where name = ?");
-        PreparedStatement insertPlayer = connection.prepareStatement("insert into PLAYER values (?, ?, ?, 1)");
-        PreparedStatement updatePlayer = connection.prepareStatement("update PLAYER set time_played = time_played + ?, lines_destroyed = lines_destroyed + ?, games_played = games_played + 1 where name = ?");
+            PreparedStatement insertGame = connection.prepareStatement("insert into GAME values (null, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement selectPlayer = connection.prepareStatement("select name from PLAYER where name = ?");
+            PreparedStatement insertPlayer = connection.prepareStatement("insert into PLAYER values (?, ?, ?, 1)");
+            PreparedStatement updatePlayer = connection.prepareStatement("update PLAYER set time_played = time_played + ?, lines_destroyed = lines_destroyed + ?, games_played = games_played + 1 where name = ?");
+            
+            PreparedStatement selectHighscore = connection.prepareStatement("select max(score) from GAME where name = ?");
+            
+            Scanner input = new Scanner(game);
+            Scanner inputName = new Scanner(nameFile);
+            try (DataOutputStream highscoreFile = new DataOutputStream(new FileOutputStream(filePath))) {
+                while(inputName.hasNextLine()) {
+                    String jsonLine = inputName.nextLine();
+                    jsonLine = jsonLine.trim();
 
-        //java.io.File data = new java.io.File("data.txt");
-        
-        //Statement statement = connection.createStatement();
+                    String name = extractValue(jsonLine, "name");
 
-        //statement.executeUpdate("insert into PLAYER (name) values (\"JDG\")");
+                    selectHighscore.setString(1, name);
+                    ResultSet selectHighscoreResult = selectHighscore.executeQuery();
 
+                    if (selectHighscoreResult.next()) {
+                        int highscore = selectHighscoreResult.getInt(1);
 
-        /*if(data.exists()) {
-            System.out.println("File already exists");
-        }*/
+                        highscoreFile.writeFloat((float)highscore);
+                        highscoreFile.flush();
+                    }
+                }
+            } catch (IOException e) {
+                System.err.println("Error al escribir el highscore: " + e.getMessage());
+            }
+            inputName.close();
 
-        /*java.io.PrintWriter output = new java.io.PrintWriter(data);
-
-        output.print("John T Smith ");
-        output.println(90);
-        output.print("Eric K Jones ");
-        output.println(85);
-
-        output.close();*/
-
-        
-        Scanner input = new Scanner(game);
-
-         if (game.lastModified() != lastModified) {
+            if (game.lastModified() != lastModified) {
                 while(input.hasNextLine()) {
                     String jsonLine = input.nextLine();
                     jsonLine = jsonLine.trim();
@@ -96,7 +102,7 @@ public class TetrisBBDD {
                 input.close();
                 lastModified = game.lastModified();
             }
-         connection.close();
+            connection.close();
         }
     }
 }
