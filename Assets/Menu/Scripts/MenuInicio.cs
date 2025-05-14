@@ -16,7 +16,8 @@ public class NewBehaviourScript : MonoBehaviour
     Rigidbody2D rgbMain, rgbDifficulty, rgbReturn;
     private float speed = -600f;
     [SerializeField] private DifficultyMenuController difficultyMenuController;
-    private Coroutine currentCoroutine;
+    private Coroutine currentCoroutineMainMenu;
+    private Coroutine currentCoroutineSinglePlayer;
 
 
     //For InputAction to navigate with gamepad and keyboard
@@ -35,12 +36,12 @@ public class NewBehaviourScript : MonoBehaviour
     public void Singleplayer(){
         menuManager.CountClicks();
         speed = speed * -1;
-        if (currentCoroutine != null)
+        if (currentCoroutineSinglePlayer != null)
         {
-            StopCoroutine(currentCoroutine);
+            StopCoroutine(currentCoroutineSinglePlayer);
         }
-        currentCoroutine = StartCoroutine(MenuBounceRight(rgbMain, false));
-        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, true));
+        currentCoroutineMainMenu = StartCoroutine(MenuBounceRight(rgbMain, false));
+        currentCoroutineSinglePlayer = StartCoroutine(MenuGoDown(rgbDifficulty, true));
     }
 
     public void Classic(){
@@ -52,10 +53,15 @@ public class NewBehaviourScript : MonoBehaviour
         menuManager.CountClicks();
         speed = speed * -1;
 
-        if (currentCoroutine != null) {
-            StopCoroutine(currentCoroutine);
+        if (currentCoroutineSinglePlayer != null) {
+            StopCoroutine(currentCoroutineSinglePlayer);
             rgbDifficulty.velocity = Vector2.zero;
             rgbReturn.velocity = Vector2.zero;
+        }
+
+        if (currentCoroutineMainMenu!= null)
+        {
+            StopCoroutine(currentCoroutineMainMenu);
         }
 
         // Hacer el rebote antes de volver a ejecutar MenuGoDown
@@ -67,7 +73,7 @@ public class NewBehaviourScript : MonoBehaviour
         yield return StartCoroutine(MenuUpSoftly(rgbReturn));
 
         // Luego haces el movimiento hacia abajo
-        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, false));
+        currentCoroutineSinglePlayer = StartCoroutine(MenuGoDown(rgbDifficulty, false));
         StartCoroutine(MenuBounceRight(rgbMain, true));
     }
     private IEnumerator MenuBounceRight(Rigidbody2D rgb, bool returnTrue){
@@ -112,14 +118,14 @@ public class NewBehaviourScript : MonoBehaviour
         
     }
     public void StopMenuCoroutine(){
-        if (currentCoroutine != null){
-            StopCoroutine(currentCoroutine);
+        if (currentCoroutineSinglePlayer != null){
+            StopCoroutine(currentCoroutineSinglePlayer);
             rgbDifficulty.velocity = Vector2.zero;
             rgbReturn.velocity = Vector2.zero;
             Debug.Log("Parao — coroutine detenida");
             StartCoroutine(MenuUpSoftly(rgbDifficulty));
             StartCoroutine(MenuUpSoftly(rgbReturn));
-            currentCoroutine = null;
+            currentCoroutineSinglePlayer = null;
         }
     }
 

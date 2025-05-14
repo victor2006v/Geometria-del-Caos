@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +7,7 @@ public class AccionesMenu : MonoBehaviour{
     [SerializeField] GameObject SettingsPanel;
     [SerializeField] GameObject GamepadPanel;
 
-    
-
+   
     private void Start(){
         SettingsPanel.SetActive(true);
     }

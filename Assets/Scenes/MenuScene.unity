@@ -3350,6 +3350,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbb6497eb3702db429dc33e17aec8dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  clicks: 0
+  current_Time: 0
+  playerName: 
+  score: 0
+  level: 0
+  lines_destroyed: 0
+  time_played: 0
+  ghostPiece: 0
 --- !u!1 &1529573475
 GameObject:
   m_ObjectHideFlags: 0

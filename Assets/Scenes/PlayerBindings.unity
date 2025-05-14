@@ -8099,7 +8099,6 @@ MonoBehaviour:
   KeyboardPanel: {fileID: 1790301019}
   SettingsPanel: {fileID: 1739076752}
   GamepadPanel: {fileID: 1642144486}
-  menuManager: {fileID: 0}
 --- !u!1 &1614856917 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6680292650847612333, guid: f25dcd618d3acd64795bf8bb32edb6c9, type: 3}
