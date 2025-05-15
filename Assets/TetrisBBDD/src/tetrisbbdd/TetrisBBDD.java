@@ -21,7 +21,11 @@ public class TetrisBBDD {
         String userHome = System.getProperty("user.home");
         java.io.File game = new java.io.File(userHome, "AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosGameData.txt");
         java.io.File nameFile = new java.io.File(userHome, "AppData\\LocalLow\\DefaultCompany\\GeometriaDelCaosName.txt");
-        
+
+        File highscoreFileDir = new File(userHome + "\\AppData\\LocalLow\\DefaultCompany");
+        if (!highscoreFileDir.exists()) {
+            highscoreFileDir.mkdir();
+        }
         String filePath = userHome + "\\AppData\\LocalLow\\DefaultCompany\\Highscore.dat";
         
         long lastModified = game.lastModified();
@@ -40,6 +44,7 @@ public class TetrisBBDD {
             
             Scanner input = new Scanner(game);
             Scanner inputName = new Scanner(nameFile);
+            
             try (DataOutputStream highscoreFile = new DataOutputStream(new FileOutputStream(filePath))) {
                 while(inputName.hasNextLine()) {
                     String jsonLine = inputName.nextLine();
@@ -52,8 +57,8 @@ public class TetrisBBDD {
 
                     if (selectHighscoreResult.next()) {
                         int highscore = selectHighscoreResult.getInt(1);
-
-                        highscoreFile.writeFloat((float)highscore);
+                        
+                        highscoreFile.writeInt(highscore);
                         highscoreFile.flush();
                     }
                 }

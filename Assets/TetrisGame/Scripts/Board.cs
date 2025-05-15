@@ -32,10 +32,11 @@ public class Board : MonoBehaviour
     private bool hasSaved;
     private bool hasSavedPiece;
     [SerializeField]
-    private TMP_Text playerText, scoreText, levelText, linesText, timeText;
+    private TMP_Text playerText, scoreText, highscoreText, levelText, linesText, timeText;
 
     public string player { get; set; }
     public int score { get; set; }
+    public int highscore { get; set; }
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
     private int previousLines = 0;
@@ -83,12 +84,13 @@ public class Board : MonoBehaviour
     private void Update()
     {
         scoreText.text = score.ToString();
+        highscoreText.text = highscore.ToString();
         levelText.text = level.ToString();
         linesText.text = lines.ToString();
         time += Time.deltaTime;
         timeText.text = time.ToString("F2");
 
-        if(lines > previousLines)
+        if(lines > previousLines + 9)
         {
             previousLines = lines;
             this.activePiece.AugmentDifficulty();

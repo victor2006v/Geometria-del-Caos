@@ -4012,7 +4012,7 @@ MonoBehaviour:
   tile: {fileID: 11400000, guid: 15c7deba4a1d9994788b72e2a5f9c519, type: 2}
   board: {fileID: 1823231209}
   trackingPiece: {fileID: 1823231212}
-  ghostPiece: 0
+  ghostPiece: 1
 --- !u!1 &1619452474
 GameObject:
   m_ObjectHideFlags: 0
@@ -5289,6 +5289,7 @@ MonoBehaviour:
   boardSize: {x: 10, y: 20}
   playerText: {fileID: 39375851}
   scoreText: {fileID: 1539486023}
+  highscoreText: {fileID: 410739026}
   levelText: {fileID: 989490714}
   linesText: {fileID: 1644982220}
   timeText: {fileID: 2089264345}
@@ -5358,6 +5359,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbefb40197ab3be41925d7f73cb93c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  board: {fileID: 1823231209}
 --- !u!1 &1890460466
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class GameDataController : MonoBehaviour
         gameData.lines_destroyed = board.lines;
         Debug.Log("Linias: " + gameData.lines_destroyed);
         gameData.ghost_piece = ghost.ghostPiece;
-        gameData.level = 1;
+        gameData.level = board.level;
         SaveGameData.SaveDataInfo(gameData);
     }
 
