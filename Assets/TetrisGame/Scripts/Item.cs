@@ -5,9 +5,8 @@ using UnityEngine;
 public class Item : MonoBehaviour{
     private string itemName;
     private string description;
-
     [SerializeField] private SpriteRenderer spriteRenderer;
-    
+    [SerializeField] private Rigidbody2D rb;
     public Item() { 
     }
     public Item(string itemName, string description) {
@@ -36,6 +35,9 @@ public class Item : MonoBehaviour{
 
     public string toString() { 
         return "Name: " + this.itemName + ", Description: " + this.description;
+    }
+    public Rigidbody2D GetRigidbody2D() {
+        return this.rb;
     }
     
 }

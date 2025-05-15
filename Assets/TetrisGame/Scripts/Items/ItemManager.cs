@@ -10,7 +10,6 @@ public class ItemManager : MonoBehaviour{
     private int itemGenerable;
     public GameObject prefab; //placeholder
     private float nextSpawnTime;
-    //private PrefabAssetType 
     private void Awake(){
         if (instance != null && instance != this){
             Destroy(gameObject);
@@ -21,7 +20,7 @@ public class ItemManager : MonoBehaviour{
         }
         itemTimer = 0f;
         itemGenerable = 0;
-        nextSpawnTime = Random.Range(45f, 60f);
+        nextSpawnTime = Random.Range(5f, 10f);
     }
 
     private void Update(){
@@ -40,18 +39,22 @@ public class ItemManager : MonoBehaviour{
             itemTimer = 0f;
 
             itemGenerable = 0;
-            nextSpawnTime = Random.Range(45f, 60f);
+            nextSpawnTime = Random.Range(5f, 10f);
             InstantiateItem();
-            ItemGoDown();
         }
         
     }
     public void InstantiateItem(){
-        Instantiate(prefab, new Vector3(0f, 9, 0), Quaternion.identity);
+        GameObject spawnedItem = Instantiate(prefab, new Vector3(0f, 9, 0), Quaternion.identity);
+        if (spawnedItem.CompareTag("Bomb")) {
+            ItemGoDown(spawnedItem);
+        }
+        
     }
-    public void ItemGoDown() {
-        prefab.transform.position = new Vector3(0, -transform.position.y, 0);
+    //Is only called if the item has the tag bomb
+    public void ItemGoDown(GameObject item) {
+        Rigidbody2D itemRb = item.GetComponent<Rigidbody2D>();
+        itemRb.velocity = new Vector2(0, -5f);
     }
-
 
 }

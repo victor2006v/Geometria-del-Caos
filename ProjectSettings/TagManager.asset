@@ -8,6 +8,9 @@ TagManager:
   - DifficultyMenu
   - Floor
   - Bounce
+  - Bomb
+  - FreezeClock
+  - FastClock
   layers:
   - Default
   - TransparentFX
