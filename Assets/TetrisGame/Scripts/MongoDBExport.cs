@@ -3,7 +3,6 @@ using MongoDB.Driver;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class MongoDBExport : MonoBehaviour{
@@ -12,7 +11,7 @@ public class MongoDBExport : MonoBehaviour{
     private IMongoDatabase database;
     private IMongoCollection<BsonDocument> collection;
     private string playerName;
-    private double time, timePlayed, score;
+    private float time, timePlayed, score;
     private bool GhostPiece;
     private int level, lines_Destroyed;
 
@@ -47,27 +46,25 @@ public class MongoDBExport : MonoBehaviour{
             var allDocuments = collection.Find(new BsonDocument()).ToList();
 
             foreach(BsonDocument doc in allDocuments){
-                Debug.Log(doc.ToJson());
                 playerName = doc["Name"].AsString;
-                time = doc["Time"].AsDouble;
-                timePlayed = doc["Time Played"].AsDouble;
-                score = doc["Score"].AsDouble;
+                time = (float)doc["Time"].ToDouble();
+                timePlayed = (float)doc["Time Played"].ToDouble();
+                score = (float)doc["Score"].ToDouble();
                 GhostPiece = doc["Ghost Piece"].AsBoolean;
                 level = doc["Level"].AsInt32;
                 lines_Destroyed = doc["Lines_Destroyed"].AsInt32;
+                Debug.Log($"Name: {playerName}, " +
+                $"Score: {score}, " +
+                $"Time: {time}, " +
+                $"TimePlayed: {timePlayed}, " +
+                $"GhostPiece: {GhostPiece}," +
+                $" Level: {level}, " +
+                $"Lines: {lines_Destroyed}");
             }
-            /*
-            Debug.Log("Player: " + playerName);
-            Debug.Log("Time: " + time);
-            Debug.Log("Score: " + score);
-            Debug.Log("Level: " + level);
-            Debug.Log("Time Played: " + timePlayed);
-            Debug.Log("GhostPiece: " + GhostPiece);
-            Debug.Log("Lines: " +  lines_Destroyed);
-            */
-        } catch(System.Exception e) {
+
+            
+        } catch (System.Exception e) {
             Debug.Log("Error exporting data: " + e.Message);
         }
-    
-    }
+    } 
 }

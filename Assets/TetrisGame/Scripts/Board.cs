@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 using TMPro;
 /*We need it to use methods from Pieces class GeometriaDelCaos*/
 using static GeometriaDelCaos;
+using UnityEngine.SceneManagement;
 
 public class Board : MonoBehaviour
 {
@@ -206,7 +207,7 @@ public class Board : MonoBehaviour
 
     /*Function that is called when the player dies*/
     public void GameOver() {
-        Debug.Log("Has perdido");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         GameDataController.instance.saveData();
         MenuManager.instance.Statistics();
         MongoConnection.instance.InitializeMongo();
