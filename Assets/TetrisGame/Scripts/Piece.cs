@@ -91,8 +91,7 @@ public class Piece : MonoBehaviour
         }
     }
     /*CONTROLS*/
-    private void Update()
-    {
+    private void Update(){
         //Clean the board
         this.board.Clear(this);
 

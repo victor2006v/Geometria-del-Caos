@@ -25,7 +25,8 @@ public class MongoConnection : MonoBehaviour {
             collection = database.GetCollection<BsonDocument>("HighScoreCollection");
 
             // Test insert
-            var document = new BsonDocument { { "Name", MenuManager.instance.playerName } 
+            var document = new BsonDocument { { "Name", MenuManager.instance.playerName }
+                
                 ,{ "Lines_Destroyed", MenuManager.instance.lines_destroyed }
                 , {"Time", MenuManager.instance.current_Time}
                 , {"Time Played", MenuManager.instance.time_played }
