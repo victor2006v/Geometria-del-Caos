@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
 public class NewBehaviourScript : MonoBehaviour
@@ -18,6 +19,10 @@ public class NewBehaviourScript : MonoBehaviour
     [SerializeField] private DifficultyMenuController difficultyMenuController;
     private Coroutine currentCoroutine;
 
+    [SerializeField]
+    Animator mainMenuAnimation, difficultyMenuAnimation;
+    [SerializeField]
+    private InputSystemUIInputModule input;
 
     //For InputAction to navigate with gamepad and keyboard
     private PlayerInput playerinput;
@@ -28,20 +33,24 @@ public class NewBehaviourScript : MonoBehaviour
     private void Awake(){
         playerinput = GetComponent<PlayerInput>();
         difficultyMenuController = GetComponent<DifficultyMenuController>();
+        mainMenuAnimation.SetBool("moveRight", false);
+        difficultyMenuAnimation.SetBool("moveDown", false);
     }
     private void OnEnable(){
         EventSystem.current.SetSelectedGameObject(firstToSelect);
     }
     public void Singleplayer(){
         menuManager.CountClicks();
-        speed = speed * -1;
+        /*speed = speed * -1;
         if (currentCoroutine != null)
         {
             StopCoroutine(currentCoroutine);
         }
         currentCoroutine = StartCoroutine(MenuBounceRight(rgbMain, false));
-        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, true));
-        
+        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, true));*/
+        mainMenuAnimation.SetBool("moveRight", true);
+        difficultyMenuAnimation.SetBool("moveDown", true);
+        input.enabled = false;
     }
 
     public void Classic(){
@@ -140,6 +149,6 @@ public class NewBehaviourScript : MonoBehaviour
     }
     public void Settings() {
         menuManager.CountClicks();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
     }
 }
