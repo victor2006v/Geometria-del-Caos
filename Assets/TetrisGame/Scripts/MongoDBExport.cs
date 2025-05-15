@@ -56,6 +56,7 @@ public class MongoDBExport : MonoBehaviour{
                 level = doc["Level"].AsInt32;
                 lines_Destroyed = doc["Lines_Destroyed"].AsInt32;
             }
+            /*
             Debug.Log("Player: " + playerName);
             Debug.Log("Time: " + time);
             Debug.Log("Score: " + score);
@@ -63,6 +64,7 @@ public class MongoDBExport : MonoBehaviour{
             Debug.Log("Time Played: " + timePlayed);
             Debug.Log("GhostPiece: " + GhostPiece);
             Debug.Log("Lines: " +  lines_Destroyed);
+            */
         } catch(System.Exception e) {
             Debug.Log("Error exporting data: " + e.Message);
         }

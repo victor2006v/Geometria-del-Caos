@@ -206,6 +206,7 @@ public class Board : MonoBehaviour
 
     /*Function that is called when the player dies*/
     public void GameOver() {
+        Debug.Log("Has perdido");
         GameDataController.instance.saveData();
         MenuManager.instance.Statistics();
         MongoConnection.instance.InitializeMongo();
