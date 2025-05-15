@@ -41,6 +41,7 @@ public class NewBehaviourScript : MonoBehaviour
         }
         currentCoroutine = StartCoroutine(MenuBounceRight(rgbMain, false));
         currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, true));
+        
     }
 
     public void Classic(){
@@ -116,7 +117,7 @@ public class NewBehaviourScript : MonoBehaviour
             StopCoroutine(currentCoroutine);
             rgbDifficulty.velocity = Vector2.zero;
             rgbReturn.velocity = Vector2.zero;
-            Debug.Log("Parao — coroutine detenida");
+            Debug.Log("Parao ï¿½ coroutine detenida");
             StartCoroutine(MenuUpSoftly(rgbDifficulty));
             StartCoroutine(MenuUpSoftly(rgbReturn));
             currentCoroutine = null;

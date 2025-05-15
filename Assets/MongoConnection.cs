@@ -25,14 +25,14 @@ public class MongoConnection : MonoBehaviour {
             collection = database.GetCollection<BsonDocument>("HighScoreCollection");
 
             // Test insert
-            var document = new BsonDocument { { "Name: ", MenuManager.instance.playerName } 
-                ,{ "Lines_Destroyed: ", MenuManager.instance.lines_destroyed }
-                , {"Time: ", MenuManager.instance.current_Time}
+            var document = new BsonDocument { { "Name", MenuManager.instance.playerName } 
+                ,{ "Lines_Destroyed", MenuManager.instance.lines_destroyed }
+                , {"Time", MenuManager.instance.current_Time}
                 , {"Time Played", MenuManager.instance.time_played }
-                , {"Ghost Piece: ", MenuManager.instance.ghostPiece }
-                , {"Score: ", MenuManager.instance.score}
-                , {"Level: ", MenuManager.instance.level }
-                , {"Total Clicks: ", MenuManager.instance.clicks }
+                , {"Ghost Piece", MenuManager.instance.ghostPiece }
+                , {"Score", MenuManager.instance.score}
+                , {"Level", MenuManager.instance.level }
+                , {"Total Clicks", MenuManager.instance.clicks }
             };
             collection.InsertOne(document);
             Debug.Log("Documento insertado correctamente.");
