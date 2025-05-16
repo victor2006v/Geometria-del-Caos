@@ -16,6 +16,8 @@ public class ItemManager : MonoBehaviour{
     private GameObject spawnedItem;
     private Animator animator;
 
+    [SerializeField] private AudioClip clockSound;
+    [SerializeField] private AudioClip explosionSound;
     [SerializeField] private Piece pieces;
     private void Awake(){
         if (instance != null && instance != this){
