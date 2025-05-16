@@ -7,8 +7,11 @@ using TMPro;
 /*We need it to use methods from Pieces class GeometriaDelCaos*/
 using static GeometriaDelCaos;
 
-public class Board : MonoBehaviour
-{
+public class Board : MonoBehaviour{
+
+    public static Board instance;
+
+
     [SerializeField] AudioClip holdSFX, singleSFX, doubleSFX, tripleSFX, tetrisSFX;
 
     /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
@@ -55,6 +58,12 @@ public class Board : MonoBehaviour
     /*It stores the tilemap component of the children and also the Piece Script*/
     private void Awake()
     {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+        } else {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         /**
          * It stores the tilemap which is in the Children of Board
          */
