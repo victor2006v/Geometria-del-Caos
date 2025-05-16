@@ -13,6 +13,7 @@ public class Spawner : MonoBehaviour {
         if (spawnTimer >= spawnInterval) {
 
             GameObject newPiece = Instantiate(piecePrefab, Canvas_UI);
+            newPiece.GetComponent<Canvas>().overrideSorting = true;
 
             // Get the RectTransform of the piece
             RectTransform pieceRect = newPiece.GetComponent<RectTransform>();

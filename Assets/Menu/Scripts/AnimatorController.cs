@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.UI;
 
-public class ActivateInputSystem : MonoBehaviour
+public class AnimatorController : MonoBehaviour
 {
     [SerializeField]
     private InputSystemUIInputModule input;
 
-    void Activate()
+    [SerializeField]
+    private MenuInicio menu;
+
+    void ActivateInputSystem()
     {
         input.enabled = true;
     }
