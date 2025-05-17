@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using ZstdSharp.Unsafe;
@@ -8,21 +9,27 @@ public class HighScore_Table : MonoBehaviour
 {
     [SerializeField] private Transform entryContainer;
     [SerializeField] private Transform entryTemplate;
-    
+
     [SerializeField] private TextMeshPro postText;
     [SerializeField] private TextMeshPro scoreText;
     [SerializeField] private TextMeshPro nameText;
-    
-    private int rank;
-    
-    private void Awake()
-    {
 
+    private int rank;
+
+    private void Awake() {
         entryTemplate.gameObject.SetActive(false);
+    }
+    private IEnumerator Start(){
+        yield return new WaitUntil(() => MongoDBExport.instance != null && MongoDBExport.instance.playerNames.Count > 0);
+
+        var sortedList = MongoDBExport.instance.playerNames
+            .Select((name, index) => new { Name = name,
+            Score = MongoDBExport.instance.scores[index] })
+            .OrderByDescending(entry => entry.Score)
+            .ToList();
 
         float templateHeight = 20f;
-
-        for (int i = 0; i < 10; i++){
+        for (int i = 0; i < sortedList.Count; i++) {
             GameObject entry = Instantiate(entryTemplate.gameObject, entryContainer);
             RectTransform entryRectTransform = entry.GetComponent<RectTransform>();
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);
@@ -30,7 +37,7 @@ public class HighScore_Table : MonoBehaviour
             rank = i + 1;
 
             //Convert this to text
-            
+
             string rankString;
             switch (rank) {
                 case 1:
@@ -48,10 +55,11 @@ public class HighScore_Table : MonoBehaviour
 
             }
             postText.text = rankString;
-            int score = Random.Range(0, 10000);
-            scoreText.text = score.ToString();
-            string name = "AAA"; 
-            nameText.text = name;
+            scoreText.text = sortedList[i].Score.ToString(); // ? ¡ahora ordenado!
+            nameText.text = sortedList[i].Name;
+
+
         }
     }
+    
 }

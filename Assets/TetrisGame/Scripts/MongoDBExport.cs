@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-public class MongoDBExport : MonoBehaviour{
+public class MongoDBExport : MonoBehaviour
+{
     public static MongoDBExport instance;
     private MongoClient client;
     private IMongoDatabase database;
@@ -15,37 +16,51 @@ public class MongoDBExport : MonoBehaviour{
     private bool GhostPiece;
     private int level, lines_Destroyed;
 
+    //list to save the info
+    public List<float> scores = new List<float>();
+    public List<string> playerNames = new List<string>();
 
-    private void Awake() {
-        if (instance != null && instance != this) {
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
             Destroy(gameObject);
-        } else {
+        }
+        else
+        {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
         string connectionString = "mongodb+srv://a22viccarnav:victor2006@geometriacluster.zxtqsud.mongodb.net/";
-        try {
+        try
+        {
             client = new MongoClient(connectionString);
             database = client.GetDatabase("GEOMETRIADELCAOS");
             collection = database.GetCollection<BsonDocument>("HighScoreCollection");
             ExportData();
-            
-        } catch (System.Exception e) {
+
+        }
+        catch (System.Exception e)
+        {
             Debug.LogError("MongoDB Connection Error: " + e.Message);
         }
 
-        
+
 
     }
 
-    private void ExportData() {
-        try {
+    private void ExportData()
+    {
+        try
+        {
             var allDocuments = collection.Find(new BsonDocument()).ToList();
 
-            foreach(BsonDocument doc in allDocuments){
+            foreach (BsonDocument doc in allDocuments)
+            {
                 playerName = doc["Name"].AsString;
                 time = (float)doc["Time"].ToDouble();
                 timePlayed = (float)doc["Time Played"].ToDouble();
@@ -53,6 +68,9 @@ public class MongoDBExport : MonoBehaviour{
                 GhostPiece = doc["Ghost Piece"].AsBoolean;
                 level = doc["Level"].AsInt32;
                 lines_Destroyed = doc["Lines_Destroyed"].AsInt32;
+                playerNames.Add(playerName);
+                scores.Add(score);
+                /*
                 Debug.Log($"Name: {playerName}, " +
                 $"Score: {score}, " +
                 $"Time: {time}, " +
@@ -60,11 +78,20 @@ public class MongoDBExport : MonoBehaviour{
                 $"GhostPiece: {GhostPiece}," +
                 $" Level: {level}, " +
                 $"Lines: {lines_Destroyed}");
+                */
+                
+                for (int i = 0; i < playerNames.Count; i++)
+                {
+                    Debug.Log($"Player {i + 1}: {playerNames[i]}, Score: {scores[i]}");
+                }
+                
             }
 
-            
-        } catch (System.Exception e) {
+
+        }
+        catch (System.Exception e)
+        {
             Debug.Log("Error exporting data: " + e.Message);
         }
-    } 
+    }
 }
