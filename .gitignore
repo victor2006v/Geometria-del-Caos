@@ -109,9 +109,6 @@ Thumbs.db
 
 # ignore compiled files
 *.com
-*.class
-*.dll
-*.exe
 *.o
 *.so
 
@@ -120,7 +117,6 @@ Thumbs.db
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
