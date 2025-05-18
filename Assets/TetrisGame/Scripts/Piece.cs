@@ -14,10 +14,6 @@ public class Piece : MonoBehaviour
     //Here we save a reference with all the different types of InputActions in the mapping context
     InputAction right, left, rotation_left, rotation_right, down, blockPiece, savePiece;
 
-    //Reference to the GameObject that has the music
-    [SerializeField]
-    GameObject Music;
-
     //The different sound effects that we can hear
     [SerializeField]
     AudioClip difficultyChangeSFX, lastDifficultyChangeSFX, lockSFX, hardDropSFX, rotateSFX, downSFX, moveSFX;
@@ -64,11 +60,11 @@ public class Piece : MonoBehaviour
         inputActionMapping.Enable();
         right = inputActionMapping.FindActionMap("Controls").FindAction("Right");
         left = inputActionMapping.FindActionMap("Controls").FindAction("Left");
-        rotation_left = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Left");
-        rotation_right = inputActionMapping.FindActionMap("Controls").FindAction("Rotation_Right");
+        rotation_left = inputActionMapping.FindActionMap("Controls").FindAction("Left Rotation");
+        rotation_right = inputActionMapping.FindActionMap("Controls").FindAction("Right Rotation");
         down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
-        blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("BlockPiece");
-        savePiece = inputActionMapping.FindActionMap("Controls").FindAction("SavePiece");
+        blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("Hard Drop");
+        savePiece = inputActionMapping.FindActionMap("Controls").FindAction("Hold");
     }
     /**
      * Params. Board board: a reference to get the board, the position and the data, which contains how is the piece behaviour
@@ -171,12 +167,12 @@ public class Piece : MonoBehaviour
         }
         if (this.board.level %2 != 0 && this.board.level <= 10)
         {
-            Music.GetComponent<AudioSource>().pitch += 0.1f;
+            BGMusicController.instance.GetComponent<AudioSource>().pitch += 0.1f;
         }
         this.board.level++;
         if (this.board.level <= 10)
         {
-            SoundMixerManager.instance.SetMusicFXVolume(-80);
+            SoundMixerManager.instance.SetMusicVolume(-80);
             SoundMixerManager.instance.SetSoundFXVolume(-80);
             if (this.board.level < 10)
             {
@@ -193,7 +189,7 @@ public class Piece : MonoBehaviour
 
     private void BGMaxVolume()
     {
-        SoundMixerManager.instance.SetMusicFXVolume(0f);
+        SoundMixerManager.instance.SetMusicVolume(0f);
         SoundMixerManager.instance.SetSoundFXVolume(0f);
     }
 

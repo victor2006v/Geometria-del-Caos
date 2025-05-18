@@ -9,10 +9,12 @@ public class AnimatorController : MonoBehaviour
     [SerializeField]
     private InputSystemUIInputModule input;
 
-    [SerializeField]
-    private MenuInicio menu;
+    public void DisableInputSystem()
+    {
+        input.enabled = false;
+    }
 
-    void ActivateInputSystem()
+    public void ActivateInputSystem()
     {
         input.enabled = true;
     }

@@ -11,9 +11,14 @@ public class SoundFXManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
     }
 
