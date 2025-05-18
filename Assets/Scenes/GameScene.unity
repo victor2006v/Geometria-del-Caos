@@ -5103,6 +5103,7 @@ MonoBehaviour:
   doubleSFX: {fileID: 8300000, guid: 00d1de7de9eb131438ef9d97efcddd4a, type: 3}
   tripleSFX: {fileID: 8300000, guid: 6041e642025706944bbcb685508f9c99, type: 3}
   tetrisSFX: {fileID: 8300000, guid: f08d4aafb196f5b44870533a33d6186b, type: 3}
+  gameoverSFX: {fileID: 8300000, guid: c9ac199ee2cfb18449aac7989986272a, type: 3}
   previewTilemap: {fileID: 277839108}
   saveTilemap: {fileID: 708701798}
   pieces:

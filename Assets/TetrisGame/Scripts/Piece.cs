@@ -63,6 +63,7 @@ public class Piece : MonoBehaviour
         down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("Hard Drop");
         savePiece = inputActionMapping.FindActionMap("Controls").FindAction("Hold");
+        this.stepDelay = MenuManager.instance.stepDelay;
     }
     /**
      * Params. Board board: a reference to get the board, the position and the data, which contains how is the piece behaviour
@@ -73,7 +74,6 @@ public class Piece : MonoBehaviour
         this.data = data;
 
         this.rotationIndex = 0;
-        this.stepDelay = MenuManager.instance.stepDelay;
         this.stepTime = Time.time + this.stepDelay;
         this.lockTime = 0f;
         this.lockDelayMoves = 0;
@@ -162,7 +162,14 @@ public class Piece : MonoBehaviour
     {
         if (this.board.level < 10)
         {
-            stepDelay -= 0.1f;
+            if (stepDelay > 0.2)
+            {
+                stepDelay -= 0.1f;
+            }
+            else
+            {
+                stepDelay -= 0.009f;
+            }
         }
         if (this.board.level %2 != 0 && this.board.level <= 10)
         {

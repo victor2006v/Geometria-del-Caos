@@ -81,6 +81,8 @@ public class MenuInicio : MonoBehaviour
 
     public void Classic(){
         MenuManager.instance.items = false;
+        MenuManager.instance.difficulty = 1;
+        MenuManager.instance.stepDelay = 0.7f;
         MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -89,16 +91,18 @@ public class MenuInicio : MonoBehaviour
 
     public void Hard() {
         MenuManager.instance.items = true;
-        MenuManager.instance.stepDelay = 0.7f;
+        MenuManager.instance.difficulty = 2;
+        MenuManager.instance.stepDelay = 0.5f;
         MenuManager.instance.CountClicks();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
     public void Extreme() {
-        MenuManager.instance.stepDelay = 0.5f;
+        MenuManager.instance.stepDelay = 0.1f;
+        MenuManager.instance.difficulty = 3;
         MenuManager.instance.CountClicks();
         MenuManager.instance.items = true;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         
     }
     public void Return() {

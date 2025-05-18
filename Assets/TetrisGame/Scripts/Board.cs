@@ -13,7 +13,7 @@ public class Board : MonoBehaviour{
 
 
     [SerializeField] private GameObject itemManager;
-    [SerializeField] AudioClip holdSFX, singleSFX, doubleSFX, tripleSFX, tetrisSFX;
+    [SerializeField] AudioClip holdSFX, singleSFX, doubleSFX, tripleSFX, tetrisSFX, gameoverSFX;
 
     /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
      * Set it can be only modified in this class*/
@@ -108,7 +108,7 @@ public class Board : MonoBehaviour{
         time += Time.deltaTime;
         timeText.text = time.ToString("F2");
 
-        if(lines > previousLines + 9)
+        if(lines > previousLines)
         {
             previousLines = lines;
             this.activePiece.AugmentDifficulty();
@@ -226,6 +226,7 @@ public class Board : MonoBehaviour{
 
     /*Function that is called when the player dies*/
     public void GameOver() {
+        SoundFXManager.instance.PlaySoundFXClip(gameoverSFX, transform, 0.5f, false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         GameDataController.instance.saveData();
         MenuManager.instance.Statistics();

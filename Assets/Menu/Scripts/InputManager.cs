@@ -35,10 +35,10 @@ public class InputManager : MonoBehaviour
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         Debug.Log($"Escena cargada: {scene.name}");
-        MiFuncion(); // Llama tu función aquí
+        ChargeBindings();
     }
 
-    private void MiFuncion()
+    private void ChargeBindings()
     {
         var rebinds = PlayerPrefs.GetString("rebinds");
         if (!string.IsNullOrEmpty(rebinds))
