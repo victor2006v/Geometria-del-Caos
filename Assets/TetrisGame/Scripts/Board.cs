@@ -1,5 +1,4 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -8,8 +7,12 @@ using TMPro;
 using static GeometriaDelCaos;
 using UnityEngine.SceneManagement;
 
-public class Board : MonoBehaviour
-{
+public class Board : MonoBehaviour{
+
+    public static Board instance;
+
+
+    [SerializeField] private GameObject itemManager;
     [SerializeField] AudioClip holdSFX, singleSFX, doubleSFX, tripleSFX, tetrisSFX;
 
     /*It stores the tilemap of the board created with Create> 2D > Tilemap. Get: It can be accessed by other different classes
@@ -41,6 +44,7 @@ public class Board : MonoBehaviour
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
     private int previousLines = 0;
+    public int multiplier;
     public float time { get; set; }
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
@@ -59,6 +63,12 @@ public class Board : MonoBehaviour
     /*It stores the tilemap component of the children and also the Piece Script*/
     private void Awake()
     {
+        if (instance != null && instance != this) {
+            Destroy(gameObject);
+        } else {
+            instance = this;
+            DontDestroyOnLoad(this.gameObject);
+        }
         /**
          * It stores the tilemap which is in the Children of Board
          */
@@ -72,9 +82,17 @@ public class Board : MonoBehaviour
         {
             this.pieces[i].Initialize();
         }
+        multiplier = 1;
+        if (MenuManager.instance.items) {
+            Debug.Log("ITEMS!!");
+            if (itemManager == null) {
+                itemManager = Resources.Load<GameObject>("Prefabs/ItemManager");
+            }
+            Instantiate(itemManager, new Vector3(0,0,0), Quaternion.identity);
+        }
     }
-    private void Start()
-    {
+        
+    private void Start(){
         player = LetterManager.instance.playerName;
         playerText.text = player.ToString();
         this.nextPieceData = GetRandomPieceData();
@@ -82,8 +100,7 @@ public class Board : MonoBehaviour
         SpawnPiece();
     }
 
-    private void Update()
-    {
+    private void Update(){
         scoreText.text = score.ToString();
         highscoreText.text = highscore.ToString();
         levelText.text = level.ToString();
@@ -275,22 +292,22 @@ public class Board : MonoBehaviour
 
         if (contLineas == 1)
         {
-            score += 100;
+            score += 100 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(singleSFX, transform, 1f, false);
         }
         else if (contLineas == 2)
         {
-            score += 200;
+            score += 200 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(doubleSFX, transform, 1f, false);
         }
         else if (contLineas == 3)
         {
-            score += 300;
+            score += 300 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(tripleSFX, transform, 1f, false);
         }
         else if (contLineas == 4)
         {
-            score += 1200;
+            score += 1200 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(tetrisSFX, transform, 1f, false);
         }
     }

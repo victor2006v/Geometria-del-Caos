@@ -12,7 +12,8 @@ public class MenuManager : MonoBehaviour{
     public int score, level, lines_destroyed;
     public float time_played;
     public bool ghostPiece;
-
+    public bool items;
+    public float stepDelay;
 
     private void Update(){
         current_Time = Time.time;

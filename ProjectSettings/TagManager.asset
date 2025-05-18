@@ -8,6 +8,14 @@ TagManager:
   - DifficultyMenu
   - Floor
   - Bounce
+  - Bomb
+  - FreezeClock
+  - FastClock
+  - PointMultiPlayer
+  - 1LineUP
+  - CameraRotation
+  - BombBlocks
+  - RotationCamera
   layers:
   - Default
   - TransparentFX

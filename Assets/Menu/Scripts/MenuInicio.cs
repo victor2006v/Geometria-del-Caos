@@ -8,9 +8,6 @@ using UnityEngine.SceneManagement;
 
 public class MenuInicio : MonoBehaviour
 {
-    //get a reference to the GameManager
-    public MenuManager menuManager;
-
     private bool difficulty, main, done, done2;
 
     [SerializeField] private GameObject MenuPanelDown;
@@ -76,37 +73,53 @@ public class MenuInicio : MonoBehaviour
         difficulty = true;
         main = false;
         done2 = false;
-        menuManager.CountClicks();
+        MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
         mainMenuAnimation.SetTrigger("moveRightTrigger");
         difficultyMenuAnimation.SetTrigger("moveUpTrigger");
     }
 
     public void Classic(){
-        menuManager.CountClicks();
+        MenuManager.instance.items = false;
+        MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
+
+    public void Hard() {
+        MenuManager.instance.items = true;
+        MenuManager.instance.stepDelay = 0.7f;
+        MenuManager.instance.CountClicks();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        
+    }
+    public void Extreme() {
+        MenuManager.instance.stepDelay = 0.5f;
+        MenuManager.instance.CountClicks();
+        MenuManager.instance.items = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        
+    }
     public void Return() {
         input.enabled = false;
         difficulty = false;
         main = true;
         done = false;
-        menuManager.CountClicks();
+        MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(cancelSFX, transform, 1f, false);
         mainMenuAnimation.SetTrigger("moveLeftTrigger");
         difficultyMenuAnimation.SetTrigger("moveDownTrigger");
     }
 
     public void Salir(){
-        menuManager.CountClicks();
+        MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(cancelSFX, transform, 1f, false);
         Debug.Log("Leaving...");
         Application.Quit();
     }
     public void Settings() {
-        menuManager.CountClicks();
+        MenuManager.instance.CountClicks();
         SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
         SceneManager.LoadScene(2);
     }

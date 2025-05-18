@@ -3728,6 +3728,7 @@ MonoBehaviour:
   lines_destroyed: 0
   time_played: 0
   ghostPiece: 0
+  items: 0
 --- !u!1 &1513224898
 GameObject:
   m_ObjectHideFlags: 0
@@ -5326,7 +5327,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1880350952}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1326613982}
+        m_TargetAssemblyTypeName: MenuInicio, Assembly-CSharp
+        m_MethodName: Extreme
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1880350952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5523,7 +5536,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1969536590}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1326613982}
+        m_TargetAssemblyTypeName: MenuInicio, Assembly-CSharp
+        m_MethodName: Hard
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1969536590
 MonoBehaviour:
   m_ObjectHideFlags: 0
