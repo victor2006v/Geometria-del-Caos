@@ -12,7 +12,9 @@ public class MenuManager : MonoBehaviour{
     public int score, level, lines_destroyed;
     public float time_played;
     public bool ghostPiece;
-
+    public bool items;
+    public float stepDelay;
+    public int difficulty;
 
     private void Update(){
         current_Time = Time.time;
@@ -40,8 +42,4 @@ public class MenuManager : MonoBehaviour{
         time_played = GameDataController.instance.gameData.time_played;
         ghostPiece = GameDataController.instance.gameData.ghost_piece;
     }
-    
-    
-
-     
 }

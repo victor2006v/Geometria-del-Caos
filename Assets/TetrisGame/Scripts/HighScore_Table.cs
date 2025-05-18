@@ -29,7 +29,9 @@ public class HighScore_Table : MonoBehaviour
             .ToList();
 
         float templateHeight = 20f;
-        for (int i = 0; i < sortedList.Count; i++) {
+        int displayCount = Mathf.Min(11, sortedList.Count);
+
+        for (int i = 0; i < displayCount; i++) {
             GameObject entry = Instantiate(entryTemplate.gameObject, entryContainer);
             RectTransform entryRectTransform = entry.GetComponent<RectTransform>();
             entryRectTransform.anchoredPosition = new Vector2(0, -templateHeight * i);

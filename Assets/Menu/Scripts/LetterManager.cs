@@ -20,7 +20,7 @@ public class LetterManager : MonoBehaviour {
     [SerializeField] private GameObject doneButton;
     [SerializeField] private GameObject letter1;
 
-    [SerializeField] private AudioClip classicSFX, okSFX, selectSFX, saveSFX, cancelSFX, moveSFX;
+    [SerializeField] private AudioClip classicSFX, hardSFX, extremeSFX, okSFX, selectSFX, saveSFX, cancelSFX, moveSFX;
 
     private void Awake() {
         if (instance != null && instance != this) {
@@ -137,7 +137,18 @@ public class LetterManager : MonoBehaviour {
         playerName = GetPlayerName();
         SoundFXManager.instance.PlaySoundFXClip(saveSFX, transform, 1f, false);
         Debug.Log("Player: " + GetPlayerName());
-        BGMusicController.instance.GetComponent<AudioSource>().clip = classicSFX;
+        if (MenuManager.instance.difficulty == 1)
+        {
+            BGMusicController.instance.GetComponent<AudioSource>().clip = classicSFX;
+        }
+        else if (MenuManager.instance.difficulty == 2)
+        {
+            BGMusicController.instance.GetComponent<AudioSource>().clip = hardSFX;
+        }
+        else if (MenuManager.instance.difficulty == 3)
+        {
+            BGMusicController.instance.GetComponent<AudioSource>().clip = extremeSFX;
+        }
         BGMusicController.instance.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }

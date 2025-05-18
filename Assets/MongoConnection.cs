@@ -41,6 +41,4 @@ public class MongoConnection : MonoBehaviour {
             Debug.LogError("MongoDB Connection Error: " + e.Message);
         }
     }
-
-
 }

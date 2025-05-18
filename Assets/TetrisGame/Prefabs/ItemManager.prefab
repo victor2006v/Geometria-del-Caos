@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2506572459902183830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 938757274760001681}
+  - component: {fileID: 8057548416708566637}
+  m_Layer: 0
+  m_Name: ItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &938757274760001681
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506572459902183830}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8057548416708566637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2506572459902183830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b688aaadc85e09541b9341229787bcee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabs:
+  - {fileID: 5536746357535631640, guid: 9ab00eb995215c7408dd452b15d7bc49, type: 3}
+  - {fileID: 1115225180517037786, guid: 305d5af2224fe854db057e77e19ea32f, type: 3}
+  - {fileID: 2942771125156223019, guid: f652d718a5d9c8b4f83c06bfc4904b58, type: 3}
+  - {fileID: 169849700289265304, guid: 0514f4f9dc8241b49b80eebc8ceadf57, type: 3}
+  - {fileID: 8313946970989760288, guid: 14123c8d489282240bfc3b62b48a1a49, type: 3}
+  - {fileID: 6235197910023458899, guid: 0d5fff7d61e16b143a015f2d538b4d96, type: 3}
+  prefab: {fileID: 2942771125156223019, guid: f652d718a5d9c8b4f83c06bfc4904b58, type: 3}
+  tile: {fileID: 11400000, guid: fb1a99ef442c3fb428a5f0cce733d752, type: 2}
+  clockSound: {fileID: 8300000, guid: 5fdacf75527ecf646924256b192d4153, type: 3}
+  explosionSound: {fileID: 8300000, guid: 33531f5685fc5c644bf05a223b3b0415, type: 3}
+  pieces: {fileID: 0}
+  mainCamera: {fileID: 0}

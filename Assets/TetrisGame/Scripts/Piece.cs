@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
 using static GeometriaDelCaos;
 
@@ -29,7 +27,7 @@ public class Piece : MonoBehaviour
     public Vector3Int position { get; private set; }
     public int rotationIndex { get; private set; }
     //1s every time the piece is falling
-    public float stepDelay = 1f;
+    public float stepDelay;
     //0.5s that you have to move the piece in the ground before lock
     public float lockDelay;
     
@@ -65,6 +63,7 @@ public class Piece : MonoBehaviour
         down = inputActionMapping.FindActionMap("Controls").FindAction("Down");
         blockPiece = inputActionMapping.FindActionMap("Controls").FindAction("Hard Drop");
         savePiece = inputActionMapping.FindActionMap("Controls").FindAction("Hold");
+        this.stepDelay = MenuManager.instance.stepDelay;
     }
     /**
      * Params. Board board: a reference to get the board, the position and the data, which contains how is the piece behaviour
@@ -163,7 +162,14 @@ public class Piece : MonoBehaviour
     {
         if (this.board.level < 10)
         {
-            stepDelay -= 0.1f;
+            if (stepDelay > 0.2)
+            {
+                stepDelay -= 0.1f;
+            }
+            else
+            {
+                stepDelay -= 0.009f;
+            }
         }
         if (this.board.level %2 != 0 && this.board.level <= 10)
         {
@@ -212,7 +218,7 @@ public class Piece : MonoBehaviour
 
     private void Lock() {
         this.board.Set(this);
-        this.board.score += 10;
+        this.board.score += 10 * Board.instance.multiplier;
 
         SpawnStar();
 
