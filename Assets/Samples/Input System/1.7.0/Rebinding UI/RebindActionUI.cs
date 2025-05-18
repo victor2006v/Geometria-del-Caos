@@ -227,6 +227,7 @@ namespace UnityEngine.InputSystem.Samples.RebindUI
             {
                 action.RemoveBindingOverride(bindingIndex);
             }
+            m_RebindOverlay?.SetActive(false);
             UpdateBindingDisplay();
         }
 

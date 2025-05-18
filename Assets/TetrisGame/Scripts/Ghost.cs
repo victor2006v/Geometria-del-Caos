@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 using UnityEngine.Tilemaps;
 using static GeometriaDelCaos;
 
@@ -20,6 +21,8 @@ public class Ghost : MonoBehaviour
     {
         this.tilemap = GetComponentInChildren<Tilemap>();
         this.cells = new Vector3Int[4];
+
+        this.ghostPiece = GameManager.instance.ghostPiece;
 
         if (ghostPiece)
         {

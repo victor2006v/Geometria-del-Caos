@@ -11,10 +11,22 @@ public class SoundMixerManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance != null && instance != this)
+        {
+            Destroy(gameObject);
+        }
+        else
         {
             instance = this;
+            DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    private void Start()
+    {
+        SetMasterVolume(PlayerPrefs.GetFloat("masterVolume"));
+        SetSoundFXVolume(PlayerPrefs.GetFloat("soundFXVolume"));
+        SetMusicVolume(PlayerPrefs.GetFloat("musicVolume"));
     }
 
     public void SetMasterVolume(float level)
@@ -27,7 +39,7 @@ public class SoundMixerManager : MonoBehaviour
         audioMixer.SetFloat("soundFXVolume", Mathf.Log10(level) * 20f);
     }
 
-    public void SetMusicFXVolume(float level)
+    public void SetMusicVolume(float level)
     {
         audioMixer.SetFloat("musicVolume", Mathf.Log10(level) * 20f);
     }

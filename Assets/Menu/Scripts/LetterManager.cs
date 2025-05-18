@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -9,10 +10,18 @@ public class LetterManager : MonoBehaviour {
     public static LetterManager instance;
     public TextMeshProUGUI[] letters; // Letras a mostrar
     [SerializeField] private InputActionAsset inputActionMapping; // Asset de controles
-    private InputAction left, right, up, down; // Acción de entrada
+    private InputAction left, right, up, down, submit, back; // Acción de entrada
     private char[] currentLetters = new char[3]; // Letras actuales
     private int currentLetterIndex = 0; // Índice de la letra seleccionada
     public string playerName;
+    private bool done;
+    private int cont;
+
+    [SerializeField] private GameObject doneButton;
+    [SerializeField] private GameObject letter1;
+
+    [SerializeField] private AudioClip classicSFX, okSFX, selectSFX, saveSFX, cancelSFX, moveSFX;
+
     private void Awake() {
         if (instance != null && instance != this) {
             Destroy(gameObject);
@@ -26,6 +35,10 @@ public class LetterManager : MonoBehaviour {
         right = inputActionMapping.FindActionMap("MenuName").FindAction("MoveRight");
         up = inputActionMapping.FindActionMap("MenuName").FindAction("MoveUp");
         down = inputActionMapping.FindActionMap("MenuName").FindAction("MoveDown");
+        submit = inputActionMapping.FindActionMap("MenuName").FindAction("Submit");
+        back = inputActionMapping.FindActionMap("MenuName").FindAction("Back");
+        done = false;
+        cont = 0;
     }
 
     private void OnEnable() {
@@ -40,26 +53,54 @@ public class LetterManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (right.triggered) {
+        if (right.triggered && !done) {
             currentLetterIndex++;
             if (currentLetterIndex >= letters.Length) {
                 currentLetterIndex = 0;
             }
-        } else if (left.triggered) { 
+            SoundFXManager.instance.PlaySoundFXClip(selectSFX, transform, 0.2f, false);
+        } else if (left.triggered && !done) { 
             currentLetterIndex--;
             if (currentLetterIndex < 0) {
                 currentLetterIndex = 2;
             }
+            SoundFXManager.instance.PlaySoundFXClip(selectSFX, transform, 0.2f, false);
         }
 
-        if (up.triggered) {
+        if (down.triggered && !done) {
             currentLetters[currentLetterIndex]++;
             if (currentLetters[currentLetterIndex] > 'Z')
                 currentLetters[currentLetterIndex] = 'A';
-        } else if (down.triggered) {
+            SoundFXManager.instance.PlaySoundFXClip(moveSFX, transform, 1f, false);
+        } else if (up.triggered && !done) {
             currentLetters[currentLetterIndex]--;
             if (currentLetters[currentLetterIndex] < 'A')
                 currentLetters[currentLetterIndex] = 'Z';
+            SoundFXManager.instance.PlaySoundFXClip(moveSFX, transform, 1f, false);
+        }
+
+        if (submit.triggered)
+        {
+            done = true;
+            cont++;
+            if (cont == 1)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
+            }
+            EventSystem.current.SetSelectedGameObject(doneButton);
+            if (submit.triggered && cont == 2)
+            {
+                SoundFXManager.instance.PlaySoundFXClip(saveSFX, transform, 1f, false);
+                Done();
+            }
+        }
+
+        if (back.triggered && done)
+        {
+            done = false;
+            cont--;
+            SoundFXManager.instance.PlaySoundFXClip(cancelSFX, transform, 1f, false);
+            EventSystem.current.SetSelectedGameObject(letter1);
         }
 
         // Actualiza las letras en la UI
@@ -95,6 +136,8 @@ public class LetterManager : MonoBehaviour {
     public void Done() {
         playerName = GetPlayerName();
         Debug.Log("Player: " + GetPlayerName());
+        BGMusicController.instance.GetComponent<AudioSource>().clip = classicSFX;
+        BGMusicController.instance.GetComponent<AudioSource>().Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 

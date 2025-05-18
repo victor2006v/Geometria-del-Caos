@@ -3,143 +3,111 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.SceneManagement;
 
-public class NewBehaviourScript : MonoBehaviour
+public class MenuInicio : MonoBehaviour
 {
     //get a reference to the GameManager
     public MenuManager menuManager;
 
+    private bool difficulty, main, done, done2;
+
     [SerializeField] private GameObject MenuPanelDown;
     [SerializeField] private GameObject firstToSelect;
+    [SerializeField] private GameObject difficultyToSelect;
+
     [SerializeField]
-    Rigidbody2D rgbMain, rgbDifficulty, rgbReturn;
-    private float speed = -600f;
-    [SerializeField] private DifficultyMenuController difficultyMenuController;
-    private Coroutine currentCoroutine;
+    public Animator mainMenuAnimation, difficultyMenuAnimation;
+    [SerializeField]
+    private InputSystemUIInputModule input;
+    [SerializeField] GameObject objectToSelect;
 
+    [SerializeField]
+    private InputActionAsset inputMapping;
+    private InputAction cancel;
 
-    //For InputAction to navigate with gamepad and keyboard
-    private PlayerInput playerinput;
+    [SerializeField]
+    AudioClip okSFX, cancelSFX;
 
-    /**
-     * This function is called when the Play button is triggered, it opens the Options Scene
-     */
     private void Awake(){
-        playerinput = GetComponent<PlayerInput>();
-        difficultyMenuController = GetComponent<DifficultyMenuController>();
+        inputMapping.Enable();
+        cancel = inputMapping.FindActionMap("UI").FindAction("Cancel");
+        main = true;
+        difficulty = false;
+        done = false;
     }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            done = false;
+            done2 = false;
+        }
+
+        if (main && !difficulty && !done)
+        {
+            EventSystem.current.SetSelectedGameObject(objectToSelect);
+            done = true;
+        }
+        else if (!main && difficulty && !done2)
+        {
+            EventSystem.current.SetSelectedGameObject(difficultyToSelect);
+            done2 = true;
+        }
+
+        if (!main && difficulty)
+        {
+            if (cancel.triggered)
+            {
+                Return();
+            }
+        }
+
+    }
+
     private void OnEnable(){
         EventSystem.current.SetSelectedGameObject(firstToSelect);
     }
+
     public void Singleplayer(){
+        input.enabled = false;
+        difficulty = true;
+        main = false;
+        done2 = false;
         menuManager.CountClicks();
-        speed = speed * -1;
-        if (currentCoroutine != null)
-        {
-            StopCoroutine(currentCoroutine);
-        }
-        currentCoroutine = StartCoroutine(MenuBounceRight(rgbMain, false));
-        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, true));
-        
+        SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
+        mainMenuAnimation.SetTrigger("moveRightTrigger");
+        difficultyMenuAnimation.SetTrigger("moveUpTrigger");
     }
 
     public void Classic(){
         menuManager.CountClicks();
+        SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void Return() {
+        input.enabled = false;
+        difficulty = false;
+        main = true;
+        done = false;
         menuManager.CountClicks();
-        speed = speed * -1;
-
-        if (currentCoroutine != null) {
-            StopCoroutine(currentCoroutine);
-            rgbDifficulty.velocity = Vector2.zero;
-            rgbReturn.velocity = Vector2.zero;
-        }
-
-        // Hacer el rebote antes de volver a ejecutar MenuGoDown
-        StartCoroutine(ReturnSequence());
-    }
-    private IEnumerator ReturnSequence() {
-        // Rebote hacia arriba antes de bajar de nuevo
-        yield return StartCoroutine(MenuUpSoftly(rgbDifficulty));
-        yield return StartCoroutine(MenuUpSoftly(rgbReturn));
-
-        // Luego haces el movimiento hacia abajo
-        currentCoroutine = StartCoroutine(MenuGoDown(rgbDifficulty, false));
-        StartCoroutine(MenuBounceRight(rgbMain, true));
-    }
-    private IEnumerator MenuBounceRight(Rigidbody2D rgb, bool returnTrue){
-        if (returnTrue){
-            yield return new WaitForSeconds(0.97f);
-        }
-
-        rgb.velocity = new Vector2(-speed * 0.3f, 0);
-        yield return new WaitForSeconds(0.1f);
-
-        rgb.velocity = new Vector2(speed, 0);
-        yield return new WaitForSeconds(1f); //Menu x to the left
-
-        rgb.velocity = Vector2.zero;
-
-        rgb.velocity = new Vector2(-speed * 0.2f, 0);
-        yield return new WaitForSeconds(0.1f);
-
-        rgb.velocity = Vector2.zero;
+        SoundFXManager.instance.PlaySoundFXClip(cancelSFX, transform, 1f, false);
+        mainMenuAnimation.SetTrigger("moveLeftTrigger");
+        difficultyMenuAnimation.SetTrigger("moveDownTrigger");
     }
 
-    private IEnumerator MenuGoDown(Rigidbody2D rgb, bool returnTrue){
-        if (returnTrue){
-            yield return new WaitForSeconds(0.97f);
-        }
-
-        rgb.velocity = new Vector2(0, speed * 0.3f); //Tough movement up
-        rgbReturn.velocity = new Vector2(0, speed * 0.3f);
-        yield return new WaitForSeconds(0.1f);
-
-        rgb.velocity = new Vector2(0, -speed);
-        rgbReturn.velocity = new Vector2(0, -speed);
-        yield return new WaitForSeconds(2f); //Menu down y
-
-        rgb.velocity = Vector2.zero;
-        rgbReturn.velocity = Vector2.zero;
-
-        rgb.velocity = new Vector2(0, speed * 0.2f);
-        rgbReturn.velocity = new Vector2(0, speed * 0.2f);
-        yield return new WaitForSeconds(0.1f);
-
-        
-    }
-    public void StopMenuCoroutine(){
-        if (currentCoroutine != null){
-            StopCoroutine(currentCoroutine);
-            rgbDifficulty.velocity = Vector2.zero;
-            rgbReturn.velocity = Vector2.zero;
-            Debug.Log("Parao � coroutine detenida");
-            StartCoroutine(MenuUpSoftly(rgbDifficulty));
-            StartCoroutine(MenuUpSoftly(rgbReturn));
-            currentCoroutine = null;
-        }
-    }
-
-    private IEnumerator MenuUpSoftly(Rigidbody2D rgb) {
-        rgb.velocity = new Vector2(0, speed * 0.3f);
-        yield return new WaitForSeconds(0.1f);
-        rgb.velocity = Vector2.zero;
-    }
-
-    /**
-     * This function is called when the Exit button is triggered
-     */
     public void Salir(){
         menuManager.CountClicks();
+        SoundFXManager.instance.PlaySoundFXClip(cancelSFX, transform, 1f, false);
         Debug.Log("Leaving...");
         Application.Quit();
     }
     public void Settings() {
         menuManager.CountClicks();
-        SceneManager.LoadScene(1);
+        SoundFXManager.instance.PlaySoundFXClip(okSFX, transform, 0.2f, false);
+        SceneManager.LoadScene(2);
     }
 }
