@@ -15,6 +15,7 @@ public class StatisticsScene : MonoBehaviour
     {
         EventSystem.current.SetSelectedGameObject(firstToSelect);
         BGMusicController.instance.GetComponent<AudioSource>().clip = menuSFX;
+        BGMusicController.instance.GetComponent<AudioSource>().pitch = 1;
         BGMusicController.instance.GetComponent<AudioSource>().Play();
     }
     public void ReturnToMenu()

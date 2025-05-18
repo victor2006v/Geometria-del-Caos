@@ -108,7 +108,7 @@ public class Board : MonoBehaviour{
         time += Time.deltaTime;
         timeText.text = time.ToString("F2");
 
-        if(lines > previousLines)
+        if(lines > previousLines + 9)
         {
             previousLines = lines;
             this.activePiece.AugmentDifficulty();

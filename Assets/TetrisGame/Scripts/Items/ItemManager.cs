@@ -25,7 +25,6 @@ public class ItemManager : MonoBehaviour{
         }
         else { 
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
         }
         itemTimer = 0f;
         itemGenerable = 0;

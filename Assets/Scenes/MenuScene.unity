@@ -3110,7 +3110,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ec9618b64799804c9dfc2f953b795ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuManager: {fileID: 1502386074}
   MenuPanelDown: {fileID: 1167708571}
   firstToSelect: {fileID: 955332588}
   difficultyToSelect: {fileID: 1694005053}
@@ -3121,6 +3120,9 @@ MonoBehaviour:
   inputMapping: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   okSFX: {fileID: 8300000, guid: e717847a033aa24469ce477a154237b4, type: 3}
   cancelSFX: {fileID: 8300000, guid: 0fa486fd259281849bc68498d988651c, type: 3}
+  mainCamera: {fileID: 487446960}
+  fadeDuration: 3
+  fadeColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1327832574
 GameObject:
   m_ObjectHideFlags: 0
@@ -3729,6 +3731,8 @@ MonoBehaviour:
   time_played: 0
   ghostPiece: 0
   items: 0
+  stepDelay: 0
+  difficulty: 0
 --- !u!1 &1513224898
 GameObject:
   m_ObjectHideFlags: 0

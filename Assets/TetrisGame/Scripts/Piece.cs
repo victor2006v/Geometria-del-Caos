@@ -16,9 +16,6 @@ public class Piece : MonoBehaviour
     [SerializeField]
     AudioClip difficultyChangeSFX, lastDifficultyChangeSFX, lockSFX, hardDropSFX, rotateSFX, downSFX, moveSFX;
 
-    [SerializeField]
-    GameObject particleSystemPrefab;
-
     //Reference of the board    
     public Board board { get; private set; }
     
@@ -247,8 +244,6 @@ public class Piece : MonoBehaviour
             {
                 Vector3Int localPos = cell + position;
                 Vector3 worldPos = new Vector3(localPos.x + 0.5f, localPos.y, 0);
-                Instantiate(particleSystemPrefab, worldPos, Quaternion.identity);
-                particleSystemPrefab.gameObject.SetActive(true);
             }
         }
     }
