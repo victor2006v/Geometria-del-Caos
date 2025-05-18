@@ -109,9 +109,6 @@ Thumbs.db
 
 # ignore compiled files
 *.com
-*.class
-*.dll
-*.exe
 *.o
 *.so
 
@@ -120,7 +117,6 @@ Thumbs.db
 *.dmg
 *.gz
 *.iso
-*.jar
 *.rar
 *.tar
 *.zip
@@ -471,3 +467,12 @@ unittest/sql/explain_filename-t
 unittest/sql/my_apc-t
 unittest/sql/sniper_modules-t
 unittest/strings/strings-t
+# Include critical Unity package configs
+!Packages/manifest.json
+!Packages/packages-lock.json
+Assets/AutoSave/
+
+# Addressables build data
+Assets/AddressableAssetsData/**/*.bin*
+Assets/AddressableAssetsData/**/*.bundle
+Assets/AddressableAssetsData/**/*.json
