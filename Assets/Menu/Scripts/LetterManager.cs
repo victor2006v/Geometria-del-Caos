@@ -90,7 +90,7 @@ public class LetterManager : MonoBehaviour {
             EventSystem.current.SetSelectedGameObject(doneButton);
             if (submit.triggered && cont == 2)
             {
-                SoundFXManager.instance.PlaySoundFXClip(saveSFX, transform, 1f, false);
+                
                 Done();
             }
         }
@@ -135,6 +135,7 @@ public class LetterManager : MonoBehaviour {
 
     public void Done() {
         playerName = GetPlayerName();
+        SoundFXManager.instance.PlaySoundFXClip(saveSFX, transform, 1f, false);
         Debug.Log("Player: " + GetPlayerName());
         BGMusicController.instance.GetComponent<AudioSource>().clip = classicSFX;
         BGMusicController.instance.GetComponent<AudioSource>().Play();
