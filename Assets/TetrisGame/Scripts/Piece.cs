@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
-using UnityEngine.Android;
 using UnityEngine.InputSystem;
 using static GeometriaDelCaos;
 
@@ -217,7 +215,7 @@ public class Piece : MonoBehaviour
 
     private void Lock() {
         this.board.Set(this);
-        this.board.score += 10;
+        this.board.score += 10 * Board.instance.multiplier;
 
         SpawnStar();
 

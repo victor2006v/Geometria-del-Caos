@@ -1,5 +1,4 @@
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -40,6 +39,7 @@ public class Board : MonoBehaviour{
     public int level { get; set; } = 1;
     public int lines { get; set; } = 0;
     private int previousLines = 0;
+    public int multiplier;
     public float time { get; set; }
     /*It returns a rectangle that represents a delimiter to know the borders and contain the pieces inside */
     public RectInt Bounds
@@ -77,15 +77,14 @@ public class Board : MonoBehaviour{
         {
             this.pieces[i].Initialize();
         }
+        multiplier = 1;
     }
-    private void Start()
-    {
+    private void Start(){
         this.nextPieceData = GetRandomPieceData();
         SpawnPiece();
     }
 
-    private void Update()
-    {
+    private void Update(){
         scoreText.text = score.ToString();
         levelText.text = level.ToString();
         linesText.text = lines.ToString();
@@ -275,22 +274,22 @@ public class Board : MonoBehaviour{
 
         if (contLineas == 1)
         {
-            score += 100;
+            score += 100 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(singleSFX, transform, 1f, false);
         }
         else if (contLineas == 2)
         {
-            score += 200;
+            score += 200 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(doubleSFX, transform, 1f, false);
         }
         else if (contLineas == 3)
         {
-            score += 300;
+            score += 300 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(tripleSFX, transform, 1f, false);
         }
         else if (contLineas == 4)
         {
-            score += 1200;
+            score += 1200 * multiplier;
             SoundFXManager.instance.PlaySoundFXClip(tetrisSFX, transform, 1f, false);
         }
     }
