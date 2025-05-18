@@ -1,37 +1,14 @@
-### Hey, We are Joel and Victor! <img src="https://media.giphy.com/media/hvRJCLFzcasrR4ia7z/giphy.gif" width="25px">
+# UML GEOMETRY OF CHAOS
 
 
-[![Gmail Badge](https://img.shields.io/badge/-vcarillnav@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white)](mailto:victorcn2006@gmail.com)
-[![Gmail Badge](https://img.shields.io/badge/-vcarillnav@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white)](mailto:victorcn2006@gmail.com)
+![UML Image](UMLImage.webp)
 
+Here you are going to find three different types of UML, the first one which contains a basic UML that we design at first, sencondly the a Development UML and the last UML with all the classes and methods we used.
+Above there are the three links, we used the platform LucidChart to create them.
 
-<p align="left"> 
-  <img src="https://komarev.com/ghpvc/?username=victorcn2006" alt="Profile views" /> 
-</p>
+[First UML](https://lucid.app/lucidchart/9c3d4325-9b29-4716-9b2e-c45c28014fd4/edit?viewport_loc=-1298%2C-1379%2C3323%2C1761%2C0_0&invitationId=inv_56354ade-ad84-4838-a934-fe1bddf9fc3c)
 
-Welcome to our Unity videogame final project workspace!  
-Here we are going to share all our current work and also the assets that we are using 🚀
+[Second UML](https://lucid.app/lucidspark/59897dc2-043d-41ef-a4a0-7586549ed8e0/edit?viewport_loc=-5872%2C-3320%2C4320%2C2295%2C0_0&invitationId=inv_877926fb-2032-44f0-84b0-c39b0b4f298c)
 
-⚠️ **Important Note:** I upload here my portfolio with all the information like projects, personal information and more stuff.
+[Third UML](https://lucid.app/lucidchart/f09ad608-cbea-48bc-bacf-1957f86aa643/edit?viewport_loc=-293%2C-100%2C2226%2C1180%2CHWEp-vi-RSFO&invitationId=inv_fce94e7d-e7a9-4d3b-b912-c73130f072f8)
 
-[Mi Portfolio](https://victorcn2006.github.io/mi-portfolio/)
-[Mi Portfolio](https://victorcn2006.github.io/mi-portfolio/)
-
----
-
-### 📊 GitHub Stats
-
-![victorcn2006's GitHub stats](https://github-readme-stats.vercel.app/api?username=victorcn2006&show_icons=true&hide=["issues"]&theme=tokyonight)
-
-![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=victorcn2006&layout=compact&theme=tokyonight)
-
----
-
-## 🧠 Programming Languages & Tools
-
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="40"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/csharp/csharp-original.svg" width="40"/>
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="40"/>
-
-
----
